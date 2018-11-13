@@ -1,0 +1,44 @@
+.registro{
+.warning{
+	background:black;
+	transition: all .4s;
+	p{
+		text-align: center;
+		color: $blueStrong;
+		font-size: .85em;
+		margin: 0;
+		padding: .5em;
+		&:before{
+			color: $orange;
+			 content: "\f101";
+			 font-family: "foundation-icons";
+			 margin-right: .5em;
+		}
+}
+
+	p:last-child{
+		padding-bottom: 1em;
+	}
+}
+	>p{
+	            display: block;
+		font-size: .85em;
+		padding: .3em;
+		margin: -1.3em 0  1.5em;
+		text-align: center;
+		color: $blue;
+		background: black;
+		transition: all .4s;
+		&:before{
+			color: $orange;
+			 content: "\f101";
+			 font-family: "foundation-icons";
+			 margin-right: .5em;
+		}
+	}
+}
+.form-registration-img{
+	figcaption{
+		border-top: 4px solid $blueStrong;
+	}
+}

@@ -1,0 +1,289 @@
+
+//∆∆-FLEX FLOW-∆∆//
+@mixin flexFlow {
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+
+
+//∆∆-FLEX FLOW POSITION-∆∆//
+@mixin space-around{
+   -webkit-justify-content: space-around; /* Safari 6.1+ */
+    justify-content: space-around;
+}
+@mixin flex-start{
+   -webkit-justify-content: flex-start; /* Safari 6.1+ */
+    justify-content: flex-start;
+}
+@mixin flex-end{
+   -webkit-justify-content: flex-end; /* Safari 6.1+ */
+    justify-content: flex-end;
+}
+@mixin center{
+   -webkit-justify-content: center; /* Safari 6.1+ */
+    justify-content: center;
+}
+@mixin baseline{
+   -webkit-justify-content: baseline; /* Safari 6.1+ */
+    justify-content: baseline;
+}
+@mixin space-between{
+   -webkit-justify-content: space-between; /* Safari 6.1+ */
+    justify-content: space-between;
+}
+@mixin initial{
+   -webkit-justify-content: initial; /* Safari 6.1+ */
+    justify-content: initial;
+}
+
+//∆∆-WRAPP-∆∆//
+@mixin contentSmall{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 410px;
+  padding: 36px 18px;
+  transition: padding .4s;
+   @media (min-width: 768px) {
+    max-width: 80%;
+   }
+          @media (min-width: 993px) {
+            max-width: 80%;
+             padding: 64px 18px;
+          }
+           @media (min-width: 1440px) {
+            max-width: 969px;
+            padding: 100px 18px;
+           }
+}
+@mixin contentMedium{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 992px;
+  padding: 36px 18px;
+  transition: padding .4s;
+   @media (min-width: 768px) {
+    max-width: 80%;
+   }
+          @media (min-width: 993px) {
+            max-width: 80%;
+             padding: 64px 18px;
+          }
+           @media (min-width: 1440px) {
+            max-width: 1440px;
+            padding: 100px 18px;
+           }
+}
+@mixin content{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 410px;
+  padding: 36px 18px;
+  @media (min-width: 768px) {
+    max-width: 90%;
+   }
+          @media (min-width: 993px) {
+            max-width: 90%;
+             padding: 64px 18px;
+          }
+           @media (min-width: 1440px) {
+            max-width: 1440px;
+            padding: 100px 18px;
+           }
+}
+
+@mixin contentLarge{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 410px;
+  padding: 36px 18px;
+}
+
+
+
+
+@mixin transform($transforms) {
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+    -webkit-transform: $transforms;
+    transform: $transforms;
+}
+
+
+@mixin animation-delay($animate-delay) {
+    -moz-animation-delay: $animate-delay;
+    -o-animation-delay: $animate-delay;
+    -ms-animation-delay: $animate-delay;
+    -webkit-animation-delay: $animate-delay;
+    animation-delay: $animate-delay;
+}
+
+@mixin animation($aniimate) {
+    -moz-animation: $aniimate;
+    -o-animation: $aniimate;
+    -ms-animation: $aniimate;
+    -webkit-animation: $aniimate;
+    animation: $aniimate;
+}
+
+
+
+
+@mixin cover {
+ -webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important; 
+}
+
+@mixin wrapp {
+  width: 100%;
+  max-width: 1442px;
+  margin-left: auto;
+  margin-right: auto; 
+}
+
+
+
+@mixin circleIcon {
+    padding: 17px 8px;
+    border-radius: 100%;
+    font-size: 22px;
+    height: 35px;
+    line-height: 0;
+}
+
+
+@mixin hoverWhite {
+    color: white;
+  } 
+
+@mixin wrappLarge{
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+@mixin contenImg {
+  overflow: hidden;
+  position: absolute; 
+}
+@mixin  imgCenter{
+  position: absolute;
+  transform: translate(-50%);
+  left: 50%;
+  top: 50%;
+}
+//Helpers
+@mixin transitionColor {
+  transition: color .4s;
+  }
+@mixin transitionBackground {
+  transition: background .4s;
+ }
+@mixin transitionHeight {
+  transition: height .4s;
+  }
+@mixin transitionWidht{
+  transition: width.4s;
+  }
+@mixin transitionOpscity{
+  transition: opacity .4s;  
+  }
+
+@mixin centerAbsolute {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  }
+
+@mixin centerAbsolute2 {
+  margin: 0 auto;
+  position: absolute;
+  left: 0;  right: 0;
+  }
+
+@mixin centerImage {
+  margin: 0 auto;
+  position: absolute;
+  left: 0;  right: 0;
+  }
+
+@mixin cero {
+	padding: 0;
+	margin: 0;
+  }
+@mixin marginAll {
+   margin: 18px;
+   }
+@mixin paddingAll {
+   margin: 18px;
+  }
+@mixin marginHorizontal {
+   margin: 0 16px;
+  }
+@mixin paddingHorizontal {
+   padding-left: 16px;
+   padding-right: 16px;
+  }
+@mixin marginVertical {
+   margin: 0 16px;
+  }
+@mixin paddingVertical {
+   margin: 0 16px;
+  }
+@mixin absolouteRight {
+  position: absolute;
+  right: 16px;
+  }
+@mixin absolouteLeft {
+  position: absolute;
+  left: 16px;
+  }
+@mixin displayNone {
+  display: none;
+  }
+
+@mixin displayShow {
+  display: block !important;
+  }      
+
+
+@mixin order($val) {
+  -webkit-box-ordinal-group: $val;  
+  -moz-box-ordinal-group: $val;     
+  -ms-flex-order: $val;     
+  -webkit-order: $val;  
+  order: $val;
+}
+
+@mixin deg($val){
+    -ms-transform: rotate($val); /* IE 9 */
+    -webkit-transform: rotate($val); /* Safari */
+    transform: rotate($val);
+}
+@mixin degradateOne  {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+10,0+10,0.88+78 */
+background: -moz-linear-gradient(top,  rgba(255,255,255,0) 0%, rgba(255,255,255,0) 10%, rgba(255,255,255,0.88) 78%, rgba(255,255,255,0.88) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 10%,rgba(255,255,255,0.88) 78%,rgba(255,255,255,0.88) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  rgba(255,255,255,0) 0%,rgba(255,255,255,0) 10%,rgba(255,255,255,0.88) 78%,rgba(255,255,255,0.88) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#e0ffffff',GradientType=0 ); /* IE6-9 */
+
+}
+@mixin box-shadow($top, $left, $blur, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow:inset $top $left $blur $color;
+    -moz-box-shadow:inset $top $left $blur $color;
+    box-shadow:inset $top $left $blur $color;
+  } @else {
+    -webkit-box-shadow: $top $left $blur $color;
+    -moz-box-shadow: $top $left $blur $color;
+    box-shadow: $top $left $blur $color;
+  }
+}

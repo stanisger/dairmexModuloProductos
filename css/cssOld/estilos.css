@@ -1,0 +1,68 @@
+body{
+    font-weight: bold;
+    font-family: sans-serif,verdana;
+    background: #5b4d53;
+}
+h1{
+    font-size: 22px;
+    text-align: center;
+}
+#head{
+    background: #302127;
+    color: #fdfdfd;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 60px;
+}
+#body{
+    background: #fff;
+    color: #222;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 2px;
+}
+.eliminar{
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 0;
+    background: #920000;
+    color: #fff;
+    cursor: pointer;
+}
+.editar{
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 0;
+    background: #468f42;
+    color: #fff;
+    cursor: pointer;
+}
+.agregar{
+    padding: 8px 0px;
+    border-radius: 4px;
+    border: 0;
+    background: #0863be;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    margin-left: 1px;
+}
+.delete_modal{
+    font-size: 12px;
+    margin: 30px 0px 0px 0px;
+    text-align: center;
+}
+.ui-dialog-title{
+    font-size: 12px;
+}
+.ui-button-text{
+    font-size: 12px;
+}
+.insert_modal,.edit_modal{
+    font-size: 12px;
+    margin: 30px 0px 0px 80px;
+}
+label{
+    display: block;
+    margin-left: 0px;
+}

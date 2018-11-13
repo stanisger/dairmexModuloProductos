@@ -1,0 +1,81 @@
+// colores
+ .bgBlack{
+ 	background: black !important;
+ }
+
+  .bgWhite{
+ 	background: white !important;
+ }
+ // text transform
+ .uppercase{
+ 	text-transform: uppercase;
+ }
+
+
+a{
+    transition: color .4s;
+}
+//∆∆ Pesos
+.extra{ font-weight:800}
+.bold{ font-weight:700}
+.medium{ font-weight:600}
+.regular{ font-weight:400}
+.light{ font-weight:300 }
+.thing{ font-weight:300}
+
+
+//∆∆ Float
+.left{float: left;}
+.right{float: right;}
+
+//∆∆ Font
+.font2{font-family: 'Montserrat', sans-serif !important;}
+
+
+//∆∆ Display
+.block{display: block;}
+.inlineBlock{display: inline-block;}
+.inline{display: inline;}
+
+
+//∆∆ Display
+.w100{ width: 100%;}
+.w50{ width: 50%;}
+.w25{ width: 25%;}
+.w10{ width: 10%;}
+
+
+ul.general {
+    list-style: none;
+    position: relative;
+}
+
+ul.general li {
+    padding-left: 25px;
+    padding-right: 20px;
+    margin-bottom: 18px;
+    line-height: 18px;
+}
+
+ul.general li:before {
+	font-family: Flaticon;
+    position: absolute;
+    left: 5px;
+    content: "\f100";
+    color:#C60;
+}
+
+
+.transitionW{
+    transition: all 1s;
+}
+
+.center-align{
+    text-align: center;
+}
+
+
+
+
+
+

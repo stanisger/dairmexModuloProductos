@@ -1,0 +1,16 @@
+[16-Aug-2017 18:44:46 UTC] PHP Warning:  define() expects at least 2 parameters, 1 given in /home/codehaus/public_html/clientes/index.php on line 57
+[16-Aug-2017 18:44:46 UTC] PHP Notice:  Use of undefined constant ENVIRONMENT - assumed 'ENVIRONMENT' in /home/codehaus/public_html/clientes/index.php on line 67
+[16-Aug-2017 18:44:51 UTC] PHP Warning:  define() expects at least 2 parameters, 1 given in /home/codehaus/public_html/clientes/index.php on line 57
+[16-Aug-2017 18:44:51 UTC] PHP Notice:  Use of undefined constant ENVIRONMENT - assumed 'ENVIRONMENT' in /home/codehaus/public_html/clientes/index.php on line 67
+[22-Aug-2017 20:02:34 UTC] PHP Fatal error:  require(): Failed opening required 'head.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/codehaus/public_html/clientes/application/views/detalles_requisicion_view.php on line 8
+[22-Aug-2017 20:03:30 UTC] PHP Fatal error:  require(): Failed opening required 'head.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/codehaus/public_html/clientes/application/views/detalles_requisicion_view.php on line 8
+[22-Aug-2017 20:03:35 UTC] PHP Fatal error:  require(): Failed opening required 'head.php' (include_path='.:/opt/alt/php56/usr/share/pear:/opt/alt/php56/usr/share/php') in /home/codehaus/public_html/clientes/application/views/detalles_requisicion_view.php on line 8
+[24-Jan-2018 14:33:06 UTC] PHP Fatal error:  Call to a member function real_escape_string() on boolean in /home2/dairmexc/public_html/crm/system/database/drivers/mysqli/mysqli_driver.php on line 391
+[12-Mar-2018 15:05:45 UTC] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/dairmexc/public_html/crm/application/models/Login_model.php on line 43
+[12-Mar-2018 15:06:16 UTC] PHP Fatal error:  Call to a member function row() on boolean in /home2/dairmexc/public_html/crm/application/models/Requisicion_model.php on line 81
+[12-Mar-2018 15:06:45 UTC] PHP Fatal error:  Call to a member function num_rows() on boolean in /home2/dairmexc/public_html/crm/application/models/Login_model.php on line 43
+[30-Apr-2018 23:05:22 UTC] PHP Fatal error:  Call to a member function row() on boolean in /home2/dairmexc/public_html/crm/application/models/Requisicion_model.php on line 159
+[22-Oct-2018 23:00:10 UTC] PHP Fatal error:  Call to a member function row() on boolean in /home2/dairmexc/public_html/crm/application/models/Requisicion_model.php on line 159
+[22-Oct-2018 23:00:11 UTC] PHP Fatal error:  Call to a member function row() on boolean in /home2/dairmexc/public_html/crm/application/models/Requisicion_model.php on line 159
+[22-Oct-2018 23:00:15 UTC] PHP Fatal error:  Call to a member function real_escape_string() on boolean in /home2/dairmexc/public_html/crm/system/database/drivers/mysqli/mysqli_driver.php on line 391
+[22-Oct-2018 23:00:15 UTC] PHP Fatal error:  Call to a member function real_escape_string() on boolean in /home2/dairmexc/public_html/crm/system/database/drivers/mysqli/mysqli_driver.php on line 391

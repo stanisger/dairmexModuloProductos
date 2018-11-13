@@ -1,0 +1,45 @@
+// * ∆∆ VARIABLES ∆∆ *
+
+$blue: #00c3f2;
+$blueLight: #5abdd4;
+$blueStrong: #0096b9;
+$blueDark: #07829e;
+$orange: #ee971b;
+$font: #4c4c4c;
+$greyLight: #E6E8EB;
+$greyUltra: #f3f3f3;
+
+
+
+
+//∆∆ COLORS ∆∆
+
+// ∆  blue
+.bgBlue{background-color: $blue !important ;} 
+.colorBlue{color: $blue !important ;} 
+
+// ∆  blueLight
+.bgBlueLight{background-color: $blueLight !important ;} 
+.colorBlueLight{color:$blueLight ;}
+
+// ∆  blueLight
+.bgBlueStrong {background-color: $blueStrong !important; }  
+.colorBlueStrong { color:$blueStrong ;}
+
+// ∆  blueLight
+.bgBlueDark {background-color:$blueDark !important; }  
+.colorBlueDark { color:$blueDark ;}
+
+// ∆ orange
+.bgOrange{background-color: $orange !important ;} 
+.colorOrange{color: $orange  !important ;} 
+
+// ∆ font
+.bgFont{background-color: $font !important ;} 
+.colorFont{color: $font  !important ;} 
+
+// ∆ font
+.bgGrey{background-color: $greyUltra !important ;} 
+.colorGrey{color: $greyUltra  !important ;} 
+
+

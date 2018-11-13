@@ -1,0 +1,103 @@
+#table{
+	margin-top: 1em;
+	table{
+		thead{
+			tr{
+				th{
+					font-size: .8em;
+				}
+			}
+		}
+		tbody{
+			tr{
+				td{
+					font-size: .8em;
+					i{
+						margin-right: .5em;
+					}
+					a{
+						color: $font;
+						text-decoration: underline;
+					}
+				}
+			}
+		}
+	}
+}
+ 
+ .table-responsive{
+ 	table{
+		thead{
+			tr{
+				th{
+					font-size: .8em;
+				}
+			}
+		}
+		tbody{
+			tr{
+				td{
+					font-size: .8em;
+					i{
+						margin-right: .5em;
+					}
+					a{
+						color: $font;
+						text-decoration: underline;
+					}
+					input, textarea{
+						margin:0;
+						height: 1.7em;
+						font-size: 1.2em;
+
+				   		 }
+				    input::placeholder {
+					  font-size: .8em;
+					}
+				textarea::placeholder {
+					  font-size: .8em;
+					}
+				}
+			}
+		}
+	}
+
+ }
+
+
+ .app-dashboard-body-content{
+
+ 	.fol{
+ 	
+ 		margin: 1em 0;
+ 		font-size: .8em;
+ 		color: $orange;
+ 	}
+ }
+ .add2{
+ 	text-align: right;
+ 	button{
+ 		color: white;
+ 		background: $font;
+ 		font-size: .9em;
+ 		padding: .5em 2em;
+ 		&:before{
+ 			content: " \f199";
+ 			  font-family: "foundation-icons";
+ 			  margin-right: .5em;
+ 		}
+ 	}
+ 	input[type="submit"]{
+ 		color: white;
+ 		background: $blueStrong;
+ 		font-size: .9em;
+ 		padding: .5em 2em;
+ 		border: 0;
+ 		&:before{
+ 			content: " \f199";
+ 			  font-family: "foundation-icons";
+ 			  margin-right: .5em;
+ 		}
+
+ 	}
+ }
