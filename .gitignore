@@ -1,0 +1,7 @@
+.buildpath
+.htaccess
+.project
+.settings/
+application/cache/
+vendor/
+application/config/config.php
