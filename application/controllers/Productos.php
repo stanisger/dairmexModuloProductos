@@ -1,18 +1,21 @@
 <?php
 /**
  * Este controlador representa el flujo de operaciones de Altas, Bajas y
- * Consultas que puede realizar el usuario a la tabla de productos.
+ * Consultas que puede realizar el usuario a la tabla de productos como API
+ * REST.
  * 
  * @author Ricardo Bermúdez Bermúdez <ricardob.sistemas@gmail.com>
  * @since  Nov 19th, 2018. <f.c.>
  * @use    CI_Controller
  */
-class Productos extends CI_Controller{
+class Productos extends CI_Controller
+{
     
     /**
-     *  Inicializa los datos de sesión la base de datos.
+     *  Inicializa los datos de sesión y la base de datos.
      */
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model(['Productos_Modelo']);
         $this->load->helper(['resterror','restresponsejson']);
@@ -24,15 +27,18 @@ class Productos extends CI_Controller{
     /**
      * Acción incial.
      */
-    public function index() {
+    public function index()
+    {
         $this->load->view('productos');
     }
     
     /**
-     * Enlace de consulta de productos. 
+     * Enlace de consulta de productos para un paginador principal.
+     *  
      * Esta operación solo se consulta con GET.
      */
-    public function paginador() {
+    public function paginador()
+    {
         $productos = $this->Productos_Modelo;
         $consulta  = $this->input->get();
         
@@ -50,7 +56,13 @@ class Productos extends CI_Controller{
           ));
     }
     
-    public function obtenerDetalles() {
+    /**
+     * Enlace de consulta de los detalles completos de un listado de productos.
+     *
+     * Esta operación solo se consulta con GET.
+     */
+    public function obtenerDetalles()
+    {
         $productos = $this->Productos_Modelo;
         $consulta  = $_GET;
         
@@ -67,10 +79,13 @@ class Productos extends CI_Controller{
     }
     
     /**
-     * Operación para agregar un nuevo producto a la base de datos.
-     * sta operación solo se consulta con POST. 
+     * Operación para agregar un listado de nuevos productos a la base de
+     * datos.
+     * 
+     * Esta operación solo se consulta con POST. 
      */
-    public function alta() {
+    public function alta()
+    {
         $productos = $this->Productos_Modelo;
         $consulta  = jsonSolicitud();
         
@@ -90,9 +105,11 @@ class Productos extends CI_Controller{
     
     /**
      * Permite la edición de productos ya existentes.
+     * 
      * Esta operación solo se ejecuta con PUT.
      */
-    public function actualizar() {
+    public function actualizar()
+    {
         $productos = $this->Productos_Modelo;
         $consulta  = jsonSolicitud();
         
@@ -110,10 +127,13 @@ class Productos extends CI_Controller{
     }
     
     /**
-     * Elimina un porducto de la base de datos.
+     * Elimina un listado de productos de la base de datos.
+     * 
      * Esta operación solo se ejecuta con DELETE.
+     * Los argumentos de ejecución van a través de la URL.
      */
-    public function eliminar() {
+    public function eliminar()
+    {
         $productos = $this->Productos_Modelo;
         $consulta  = $_GET;
         
