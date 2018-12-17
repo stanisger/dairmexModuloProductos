@@ -11,7 +11,6 @@
  */
 class Productos_Modelo extends CI_Model
 {
-    
     /**
      * Referencia al controlador
      */
@@ -42,9 +41,30 @@ class Productos_Modelo extends CI_Model
      * @param  Integer $noElementos Número de elementos por página.
      * @return Array   Productos de la base de datos.
      * */
-    public function paginador($pagina=0, $noElementos=0)
+    public function paginador($consulta)
     {
-        return ['productos'];
+        $pagina      = !empty($consulta['pagina'])    ? $consulta['pagina']    : 1;
+        $noElementos = !empty($consulta['elementos']) ? $consulta['elementos'] : 10;
+        $nombre      = !empty($consulta['nombre'])    ? $consulta['nombre']    : '';
+        
+        $this->db
+        ->select('id_producto')
+        ->select('nombre')
+        ->select('cantidad')
+        ->select('categoria')
+        ->from('productos')
+        ->order_by('id_producto','DESC')
+        ->like('nombre', $nombre);
+        
+        $seccion = ($pagina-1) * $noElementos;
+        
+        if ($seccion===0) {
+            $this->db->limit( $noElementos );
+        } else {
+            $this->db->limit( $seccion, $noElementos );
+        }
+        
+        return ['productos' => $this->db->get()->result()];
     }
     
     
@@ -55,10 +75,21 @@ class Productos_Modelo extends CI_Model
      * @param  Array $identificadores Listado de identificadores de productos.
      * @return Array Arreglo asociativo con los detalles del producto.
      */
-    public function obtenerDetalles($identificadores)
+    public function obtener($identificadores)
     {
         $this->db->or_where_in('id_producto',$identificadores);
-        return['productos' => $this->db->get('productos')->result()];
+        
+        $productos = $this->db->get('productos')->result();
+        
+        foreach($productos as $producto) {
+            $producto->proveedores = $this->_ci
+            ->PreciosDeProveedores_Modelo
+            ->obtenerProveedoresPorProducto(
+                $producto->id_producto
+            );
+        }
+        
+        return ['productos' => $productos];
     }
     
     
@@ -71,7 +102,7 @@ class Productos_Modelo extends CI_Model
      * @param  Array $productos Listado de productos por agregar.
      * @return Array Datos de los productos agregados a la base de datos.
      */
-    public function agregar($productos)
+    public function alta($productos)
     {
         $identificadores = [];
         
@@ -87,14 +118,14 @@ class Productos_Modelo extends CI_Model
             //Agrega proveedores en caso de no existir en la base de datos.
             $proveedores = $this->_ci
             ->Proveedores_Modelo
-            ->normalizaProveedores(
+            ->altaNormalizaProveedores(
                 $proveedores, $this->db->insert_id()
             );
             
-            //añade precios de los proveedores para el producto actual.
+            //Añade precios de los proveedores para el producto actual.
             $this->_ci
             ->PreciosDeProveedores_Modelo
-            ->agregar($proveedores);
+            ->alta($proveedores);
         }
         
         if (!$this->db->trans_status()) {
@@ -104,7 +135,7 @@ class Productos_Modelo extends CI_Model
         
         $this->db->trans_commit();
         
-        return $this->obtenerDetalles($identificadores);
+        return $this->obtener($identificadores);
     }
     
     
@@ -121,19 +152,18 @@ class Productos_Modelo extends CI_Model
         $this->db->trans_begin();
         
         foreach ($productos as $producto) {
-            array_pop_key($producto, 'proveedores');
             $identificadores[] = $producto['id_producto'];
             $this->db->where('id_producto', $producto['id_producto']);
             $this->db->update('productos', $producto);
         }
         
         if (!$this->db->trans_status()) {
-            $this->db->trans_commit();
+            $this->db->trans_rollback();
             return ['error'=>$this->db->error()];
         }
         
         $this->db->trans_commit();
-        return $this->obtenerDetalles($identificadores);
+        return $this->obtener($identificadores);
     }
     
     
@@ -146,7 +176,7 @@ class Productos_Modelo extends CI_Model
      */
     public function eliminar($identificadores)
     {
-        $productosPorEliminar = $this->obtenerDetallesProducto($identificadores);
+        $productosPorEliminar = $this->obtener($identificadores);
         
         $this->db->or_where_in('id_producto', $identificadores);
         $this->db->delete('productos');

@@ -8,9 +8,8 @@
  * @since  Nov 19th, 2018. <f.c.>
  * @use    CI_Controller
  */
-class Productos extends CI_Controller
+class ProductosAPI extends CI_Controller
 {
-    
     /**
      *  Inicializa los datos de sesión y la base de datos.
      */
@@ -24,13 +23,6 @@ class Productos extends CI_Controller
         $this->load->database('default');
     }
     
-    /**
-     * Acción incial.
-     */
-    public function index()
-    {
-        $this->load->view('productos');
-    }
     
     /**
      * Enlace de consulta de productos para un paginador principal.
@@ -49,22 +41,19 @@ class Productos extends CI_Controller
             restErrorOperacionNoPermitida();
         }
         
-        
-        jsonRespuesta(
-          $productos->paginador(
-            $consulta['pagina'], $consulta['elementos']
-          ));
+        jsonRespuesta($productos->paginador($consulta));
     }
+    
     
     /**
      * Enlace de consulta de los detalles completos de un listado de productos.
      *
      * Esta operación solo se consulta con GET.
      */
-    public function obtenerDetalles()
+    public function obtener()
     {
         $productos = $this->Productos_Modelo;
-        $consulta  = $_GET;
+        $consulta  = $this->input->get();
         
         if ($this->input->server('REQUEST_METHOD')!=='GET') {
             restErrorMetodoNoPermitido();
@@ -74,9 +63,10 @@ class Productos extends CI_Controller
         }
         
         jsonRespuesta(
-          $productos->obtenerDetalles($consulta['identificadores'])
+          $productos->obtener($consulta['identificadores'])
         );
     }
+    
     
     /**
      * Operación para agregar un listado de nuevos productos a la base de
@@ -99,9 +89,10 @@ class Productos extends CI_Controller
         }
         
         jsonRespuesta(
-            $productos->agregar($consulta['productos'])
+            $productos->alta($consulta['productos'])
         );
     }
+    
     
     /**
      * Permite la edición de productos ya existentes.
@@ -126,6 +117,7 @@ class Productos extends CI_Controller
         );
     }
     
+    
     /**
      * Elimina un listado de productos de la base de datos.
      * 
@@ -135,7 +127,7 @@ class Productos extends CI_Controller
     public function eliminar()
     {
         $productos = $this->Productos_Modelo;
-        $consulta  = $_GET;
+        $consulta  = $this->input->get();
         
         if ($this->input->server('REQUEST_METHOD')!=='DELETE') {
             restErrorMetodoNoPermitido();

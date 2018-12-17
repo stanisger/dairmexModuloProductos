@@ -11,7 +11,6 @@
  */
 class Proveedores_Modelo extends CI_Model
 {
-    
     /**
      * Regresa la lista de proveedores cuyo identificador(id_proveedor)
      * coincide con los utilizados en la lista de identificadores.
@@ -19,7 +18,7 @@ class Proveedores_Modelo extends CI_Model
      * @param  Array $identificadores Lista de identificadores de proveedores.
      * @return Array Lista de proveedores.
      */
-    public function obtenerDetalles($identificadores)
+    public function obtener($identificadores)
     {
         $this->db->or_where_in('id_proveedor',$identificadores);
         
@@ -27,6 +26,7 @@ class Proveedores_Modelo extends CI_Model
             'proveedores' => $this->db->get('proveedores')->result()
         ];
     }
+    
     
     /**
      * Regresa la lista de proveedores parecidos al nombre de un argumento.
@@ -46,32 +46,6 @@ class Proveedores_Modelo extends CI_Model
     
     
     /**
-     * Se le pasa una lista de proveedores y en caso de no detectar en el
-     * registro la llave <b>id_proveedor</b> se agrega a la base de datos.
-     * 
-     * @see PreciosDeProveedores_Modelo::agregarPreciosDeProveedores()
-     * 
-     * @param  Array   $proveedores Lista de Proveedores.
-     * @param  Integer $idProducto  Identificador del producto.
-     * @return Array   Registros de proveedores con el identificador del
-     *                 proveedor y el identificador del producto listos
-     *                 para agregarse a los registros de precios por
-     *                 proveedor. 
-     */
-    public function normalizaProveedores($proveedores, $idProducto)
-    {
-        foreach ($proveedores as &$proveedor) {
-            if ( empty($proveedor['id_proveedor']) ) {
-                $proveedor['id_proveedor'] = $this->agregar( $proveedor['nombre'] );
-            }
-            unset($proveedor['nombre']);
-            $proveedor['id_producto'] = $idProducto;
-        }
-        
-        return $proveedores;
-    }
-    
-    /**
      * Añade un nuevo proveedor a la base de datos.
      * 
      * @param  String  $nombre Nombre del proveedor.
@@ -79,15 +53,37 @@ class Proveedores_Modelo extends CI_Model
      *                             agrego corectamente en otro caso regresa
      *                             null.
      */
-    public function agregar($nombre)
+    public function alta($nombre)
     {
         $this->db->insert('proveedores', ['nombre' => $nombre]);
-        
         return $this->db->insert_id();
     }
     
-    public function eliminar($nombre)
+    
+    /**
+     * Se le pasa una lista de proveedores y en caso de no detectar en el
+     * registro la llave <b>id_proveedor</b> se agrega a la base de datos.
+     *
+     * @see PreciosDeProveedores_Modelo::agregarPreciosDeProveedores()
+     *
+     * @param  Array   $proveedores Lista de Proveedores.
+     * @param  Integer $idProducto  Identificador del producto.
+     * @return Array   Registros de proveedores con el identificador del
+     *                 proveedor y el identificador del producto listos
+     *                 para agregarse a los registros de precios por
+     *                 proveedor.
+     */
+    public function altaNormalizaProveedores($proveedores, $idProducto)
     {
         
+        foreach ($proveedores as &$proveedor) {
+            if ( empty($proveedor['id_proveedor']) ) {
+                $proveedor['id_proveedor'] = $this->alta( $proveedor['nombre'] );
+            }
+            unset($proveedor['nombre']);
+            $proveedor['id_producto'] = $idProducto;
+        }
+        
+        return $proveedores;
     }
 }

@@ -7,9 +7,8 @@
  * @since  Dec 12th, 2018.
  * @use    CI_Controller
  */
-class Proveedores extends CI_Controller
+class ProveedoresAPI extends CI_Controller
 {
-    
     /**
      * Inicializa el controlador.
      */
@@ -23,17 +22,43 @@ class Proveedores extends CI_Controller
         $this->load->database('default');
     }
     
+    
+    /**
+     * Regresa los detalles completos de cada proveedor pasado en el vector
+     * <b>identificadores</b> que viene como parámetro en la URL de petición.
+     * 
+     * Esta operación solo se puede utilizar con el método GET.
+     */
+    public function obtener()
+    {
+        $proveedores = $this->Proveedores_Modelo;
+        $consulta    = $this->input->get();
+        
+        if ($this->input->server('REQUEST_METHOD')!=='GET') {
+            restErrorMetodoNoPermitido();
+        }
+        
+        if ( !$consulta['identificadores'] ) {
+            restErrorOperacionNoPermitida();
+        }
+        
+        jsonRespuesta(
+            $proveedores->obtener($consulta['identificadores'])
+        );
+    }
+    
+    
     /**
      * Obtiene todos los proveedores de la base de datos con algún nombre
      * parecido al que se pasa a través de la URL en el parámetro
      * <b>nombre</b>.
-     *  
+     *
      * Esta operación solo se puede utilizar con el método GET.
      */
     public function obtenerPorNombre()
     {
         $proveedores = $this->Proveedores_Modelo;
-        $consulta    = $_GET;
+        $consulta    = $this->input->get();
         
         if ($this->input->server('REQUEST_METHOD')!=='GET') {
             restErrorMetodoNoPermitido();
@@ -45,40 +70,5 @@ class Proveedores extends CI_Controller
         jsonRespuesta(
             $proveedores->obtenerPorNombre($consulta['nombre'])
         );
-    }
-    
-    /**
-     * Regresa los detalles completos de cada proveedor pasado en el vector
-     * <b>identificadores</b> que viene como parámetro en la URL de petición.
-     * 
-     * Esta operación solo se puede utilizar con el método GET.
-     */
-    public function obtenerDetalles()
-    {
-        $proveedores = $this->Proveedores_Modelo;
-        $consulta    = $_GET;
-        
-        if ($this->input->server('REQUEST_METHOD')!=='GET') {
-            restErrorMetodoNoPermitido();
-        }
-        
-        if ( !$consulta['identificadores'] ) {
-            restErrorOperacionNoPermitida();
-        }
-        
-        jsonRespuesta(
-            $proveedores->obtenerDetalles($consulta['identificadores'])
-        );
-    }
-    
-    /**
-     * Elimina el proveedor de la base de datos y todos sus precios asociados a
-     * los distintos productos.
-     * 
-     * Esta operación solo se puede utilizar con el método DELETE. 
-     */
-    public function eliminar()
-    {
-        
     }
 }

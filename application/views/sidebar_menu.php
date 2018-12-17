@@ -37,8 +37,8 @@
               </li>
               <li>
               	  <a 
-              	   href="<?= base_url() . 'Productos/index' ?>"
-              	   class="<?=strpos($_SERVER['REQUEST_URI'], 'Productos/') ? 'is-active':'' ?>">
+              	   href="<?= base_url() . 'ProductosUI/index' ?>"
+              	   class="<?=strpos($_SERVER['REQUEST_URI'], 'ProductosUI/') ? 'is-active':'' ?>">
                 	<i class="fi-page colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Mis productos</span>
                   </a>
               </li>
