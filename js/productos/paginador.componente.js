@@ -1,18 +1,23 @@
 var Aplicacion = Aplicacion || {};
 
 Aplicacion.ComponentePaginador = (() => {
-    let { ServicioProductos } = Aplicacion;
+    //Módulos importados.
+    let { ServicioProductos, Utilidades } = Aplicacion;
     
     //Variables de control del paginador.
-    const REGISTROS_POR_PAGINA = 5;
-    let   TOTAL_DE_REGISTROS   = 0;
-
-    let uiContenido;
-    let uiTotalDeRegistros;
-    let uiControlDePaginacion;
+    const REGISTROS_POR_PAGINA     = 5;
+    let   TOTAL_DE_REGISTROS       = 0;
+    
+    //Referencia de componentes en HTML.
+    let uiContenido,
+        uiTotalDeRegistros,
+        uiControlDePaginacion;
     
     function cargarComponente () {
-        let componente = '#componente-paginador';
+        let componente = '#componente-paginador',
+            pagina =  (location.hash
+                      .match(/#pagina=\d+/ig)
+                      && parseInt(location.hash.split('=')[1])) || 1;
 
         //Carga referencias de los elementos de la interfaz.
         uiContenido           = document.querySelector(`${componente} tbody`);
@@ -20,51 +25,36 @@ Aplicacion.ComponentePaginador = (() => {
         uiControlDePaginacion = document.querySelector(`${componente} .pagination`);
         
         //Carga la primera página del paginador.
-        totalDeElementos();
-        cargarPagina(1, REGISTROS_POR_PAGINA);
-        window.onhashchange = () => renderControlDePaginacion(
-            location.hash.split('=')[1]
+        escuchaCambioDePagina();
+        cargaPaginador(pagina);
+    }
+
+    function escuchaCambioDePagina() {
+        window.onhashchange = () =>
+            location.hash.match(/#pagina=\d+/ig) 
+            && cargaPaginador(
+              parseInt(location.hash.split('=')[1]
+            )
         );
     }
     
-    function cargarPagina(...params) {
+    function cargaPaginador(pagina=1, nombre='') {
+        //Recarga el total de productos y el contrrol de paginación
         ServicioProductos
-        .paginador(...params)
+        .totalDeRegistros(nombre)
+        .then(totalDeElementos => TOTAL_DE_REGISTROS=totalDeElementos)
+        .then(() => 
+             renderEncabezado()
+          || renderControlDePaginacion(pagina));
+
+        //Obtiene productos desde el servicio de paginación
+        ServicioProductos
+        .paginador(pagina, REGISTROS_POR_PAGINA)
         .then(productos => renderListaDeProductos(productos));
     }
     
-    function totalDeElementos(nombre='') {
-        ServicioProductos
-        .totalDeRegistros(nombre)
-        .then(totalDeElementos => TOTAL_DE_REGISTROS = totalDeElementos)
-        .then(() => renderControlDePaginacion(1));
-    }
-    
-    function renderControlDePaginacion(pagina) {
-        uiTotalDeRegistros.innerHTML  = `Total de productos: ${TOTAL_DE_REGISTROS}`;
-
-        let noDePáginas = Math.floor(
-          TOTAL_DE_REGISTROS/REGISTROS_POR_PAGINA
-        );
-        
-        uiControlDePaginacion.innerHTML = `
-          <li class="arrow">
-            <a href="#pagina=${pagina - 1}">&laquo;</a>
-          </li>`;
-        
-        for(let i=1;i<=noDePáginas; i++) {
-            uiControlDePaginacion.innerHTML += i==pagina
-              ?`<li class="current"><a href="#pagina=${i}">${i}</a></li>`
-              :`<li><a href="#pagina=${i}">${i}</a></li>`;
-        }
-
-        uiControlDePaginacion.innerHTML += `
-          <li class="arrow">
-            <a href="#pagina=${pagina + 1}">&raquo;</a>
-          </li>`;
-        
-
-        uiControlDePaginacion.innerHTML = '<li class="arrow unavailable"><a>&laquo;</a></li>';
+    function renderEncabezado() {
+        uiTotalDeRegistros.innerHTML = `Total de productos: ${TOTAL_DE_REGISTROS}`;
     }
     
     function renderListaDeProductos(productos) {
@@ -78,6 +68,34 @@ Aplicacion.ComponentePaginador = (() => {
               <td><button href="about.html" class="button">Editar</button></td>
             </tr>`);
     }
-    
+
+    function renderControlDePaginacion(pagina) {
+
+        let noDePáginas = Math.ceil(
+          TOTAL_DE_REGISTROS/REGISTROS_POR_PAGINA
+        );
+
+        uiControlDePaginacion.innerHTML = `
+          <li class="arrow">
+            <a ${pagina > 1
+               ?`href="#pagina=${pagina-1}"`
+               :`class="unavailable"`}>
+               &laquo; </a>
+          </li>
+            ${Utilidades
+              .generadorDeIndices(noDePáginas, 5, pagina)
+              .map(
+                indice => indice==pagina
+                ?`<li class="current"> <a>${indice}</a> </li>`
+                :`<li> <a href="#pagina=${indice}">${indice}</a> </li>`)
+              .join('')}
+          <li class="arrow">
+            <a ${pagina < noDePáginas
+               ?`href="#pagina=${pagina+1}"`
+               :'class="unavailable"'}>
+               &raquo; </a>
+          </li>`;
+    }
+
     return {cargarComponente};
 })();

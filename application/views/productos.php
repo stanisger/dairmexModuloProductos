@@ -1,4 +1,4 @@
-<?=require('header.php')?>
+<?php require('header.php')?>
   <body>
 
 
@@ -12,7 +12,7 @@
         
         <!--CONTENT MODULE-->
         <div id="modulo-productos" class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-          
+
           <div id="componente-buscar-productos" style="position: absolute; width: calc(100% - 64px);">
             <input type="text" placeholder="Buscar producto" style="margin-bottom: 0;">
             <ul class="list-group" style="margin-left: 0;"></ul>
@@ -33,18 +33,9 @@
               <tbody></tbody>
             </table>
 
-            <div class="pagination-centered">
-              <ul class="pagination">
-                <li class="arrow unavailable"><a>&laquo;</a></li>
-                <li class="current"><a href="#pagina=1">1</a></li>
-                <li><a href="#pagina=2">2 </a></li>
-                <li><a href="#pagina=3">3 </a></li>
-                <li><a href="#pagina=4">4 </a></li>
-                <li><a href="#pagina=5">5</a></li>
-                <li><a href="#pagina=6">6</a></li>
-                <li class="arrow"><a href="#pagina=2">&raquo;</a></li>
-              </ul>
-            </div>
+            <nav aria-label="Pagination">
+              <ul class="pagination text-center"></ul>
+            </nav>
           </div>
 	    </div>
 	    
@@ -52,9 +43,10 @@
 	</div>
 	
 	<!--MODULE SCRIPTS-->
-	<script type="text/javascript" src="<?=base_url()?>js/productos/productos.servicio.js"></script> 
+	<script type="text/javascript" src="<?=base_url()?>js/productos/productos.servicio.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/productos.utilidades.js"></script> 
 	<script type="text/javascript" src="<?=base_url()?>js/productos/buscar-productos.componente.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/paginador.componente.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/index.js"></script>
 
-<?=require('footer.php')?>
+<?php require('footer.php')?>

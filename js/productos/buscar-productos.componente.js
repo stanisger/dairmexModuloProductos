@@ -10,8 +10,8 @@ var Aplicacion = Aplicacion || {};
 Aplicacion.ComponenteBuscarProductos = (() => {
 
     let { ServicioProductos } = Aplicacion;
-    let entrada;
-    let sugerencias;
+    let uiEntrada;
+    let uiSugerencias;
 
     /**
      * Inicializa la semantica de los elementos del componente de búsqueda
@@ -21,11 +21,11 @@ Aplicacion.ComponenteBuscarProductos = (() => {
         let componente = '#componente-buscar-productos';
 
         //Carga referencias de los elementos de la interfaz.
-        entrada     = document.querySelector(`${componente} > input`);
-        sugerencias = document.querySelector(`${componente} >ul`);
+        uiEntrada     = document.querySelector(`${componente} > input`);
+        uiSugerencias = document.querySelector(`${componente} > ul`);
          
         //Carga de eventos de la interfaz.
-        entrada.addEventListener('keyup', buscarProductos);
+        uiEntrada.addEventListener('keyup', buscarProductos);
     }
 
     /**
@@ -35,7 +35,7 @@ Aplicacion.ComponenteBuscarProductos = (() => {
      */
     function buscarProductos () {
         ServicioProductos
-        .obtenerPorNombre(entrada.value)
+        .obtenerPorNombre(uiEntrada.value)
         .then(productos => productos.map(producto => producto.nombre))
         .then(nombres   => renderSugerencias(nombres));
     }
@@ -48,9 +48,9 @@ Aplicacion.ComponenteBuscarProductos = (() => {
      * @param {Array<string>} nombres Lista de nombres de productos.
      */
     function renderSugerencias(nombres) {
-        sugerencias.innerHTML = '';
+        uiSugerencias.innerHTML = '';
         nombres.forEach(
-          nombre => sugerencias.innerHTML += `
+          nombre => uiSugerencias.innerHTML += `
              <li class="list-group-item">${nombre}</li>`);
     }
 

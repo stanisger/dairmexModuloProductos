@@ -74,9 +74,9 @@ class Productos_Modelo extends CI_Model
         if ($seccion===0) {
             $this->db->limit( $noElementos );
         } else {
-            $this->db->limit( $seccion, $noElementos );
+            $this->db->limit( $noElementos, $seccion );
         }
-        
+
         return ['productos' => $this->db->get()->result()];
     }
     
