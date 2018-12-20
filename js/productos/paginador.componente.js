@@ -9,7 +9,8 @@ Aplicacion.ComponentePaginador = (() => {
     let   TOTAL_DE_REGISTROS       = 0;
     
     //Referencia de componentes en HTML.
-    let uiContenido,
+    let uiComponentePrincipal,
+        uiContenido,
         uiTotalDeRegistros,
         uiControlDePaginacion;
     
@@ -23,6 +24,7 @@ Aplicacion.ComponentePaginador = (() => {
                       && parseInt(location.hash.split('=')[1])) || 1;
 
         //Carga referencias de los elementos de la interfaz.
+        uiComponentePrincipal = document.querySelector(`${componente}`);
         uiContenido           = document.querySelector(`${componente} tbody`);
         uiTotalDeRegistros    = document.querySelector(`${componente} h5`);
         uiControlDePaginacion = document.querySelector(`${componente} .pagination`);
@@ -60,19 +62,31 @@ Aplicacion.ComponentePaginador = (() => {
     }
     
     function renderEncabezado() {
-        uiTotalDeRegistros.innerHTML = `Total de productos: ${TOTAL_DE_REGISTROS}`;
+        if (TOTAL_DE_REGISTROS) {
+          uiTotalDeRegistros.innerHTML = `Total de productos: ${TOTAL_DE_REGISTROS}`;
+        } else {
+          uiComponentePrincipal.innerHTML =`<h5>Sin productos registrados</h5>`
+          throw Error('Sin productos registrados');
+        }
     }
     
     function renderListaDeProductos(productos) {
-        uiContenido.innerHTML = '';
-        productos.forEach(
-          producto => uiContenido.innerHTML += `
+        uiContenido.innerHTML = productos
+        .map(
+          producto => `
             <tr>
               <td>${producto.nombre}</td>
               <td>${producto.cantidad} PZ</td>
               <td>${producto.categoria}</td>
-              <td><button href="about.html" class="button">Editar</button></td>
-            </tr>`);
+              <td>
+                <button
+                  onclick="location.href='productoalta#id=${producto.id_producto}'"
+                  class="button">
+                  Editar
+                </button>
+              </td>
+            </tr>`)
+        .join('');
     }
 
     function renderControlDePaginacion(pagina) {
@@ -84,7 +98,7 @@ Aplicacion.ComponentePaginador = (() => {
         uiControlDePaginacion.innerHTML = `
           <li class="arrow">
             <a ${pagina > 1
-               ?`href="#pagina=${pagina-1}"`
+               ?`href="#pagina=${pagina - 1}"`
                :`class="unavailable"`}>
                &laquo; </a>
           </li>
@@ -97,7 +111,7 @@ Aplicacion.ComponentePaginador = (() => {
               .join('')}
           <li class="arrow">
             <a ${pagina < noDePáginas
-               ?`href="#pagina=${pagina+1}"`
+               ?`href="#pagina=${pagina + 1}"`
                :'class="unavailable"'}>
                &raquo; </a>
           </li>`;

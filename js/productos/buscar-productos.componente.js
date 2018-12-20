@@ -23,10 +23,13 @@ Aplicacion.ComponenteBuscarProductos = (() => {
         //Carga referencias de los elementos de la interfaz.
         uiEntrada     = document.querySelector(`${componente} > input`);
         uiSugerencias = document.querySelector(`${componente} > ul`);
-         
+
         //Carga de eventos de la interfaz.
         uiEntrada.addEventListener('keyup', buscarProductos);
-        uiEntrada.addEventListener('blur', ()=>uiSugerencias.innerHTML = '');
+        uiEntrada.addEventListener('blur',  () => setTimeout(
+            () => uiSugerencias.innerHTML = '', 100
+          )
+        );
     }
 
     /**
@@ -37,8 +40,7 @@ Aplicacion.ComponenteBuscarProductos = (() => {
     function buscarProductos () {
         ServicioProductos
         .obtenerPorNombre(uiEntrada.value)
-        .then(productos => productos.map(producto => producto.nombre))
-        .then(nombres   => renderSugerencias(nombres));
+        .then(productos => renderSugerencias(productos));
     }
 
     /**
@@ -48,11 +50,14 @@ Aplicacion.ComponenteBuscarProductos = (() => {
      * @link  https://foundation.zurb.com/building-blocks/blocks/list-group.html
      * @param {Array<string>} nombres Lista de nombres de productos.
      */
-    function renderSugerencias(nombres) {
-        uiSugerencias.innerHTML = '';
-        nombres.forEach(
-          nombre => uiSugerencias.innerHTML += `
-             <li class="list-group-item">${nombre}</li>`);
+    function renderSugerencias(productos) {
+        uiSugerencias.innerHTML = productos
+          .map( ({id_producto, nombre}) => `
+            <li
+              onclick="location.href='productoalta#id=${id_producto}'"
+              class="list-group-item">${nombre}
+            </li>`)
+          .join('');
     }
 
     return {cargarComponente}

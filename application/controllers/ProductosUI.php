@@ -22,4 +22,14 @@ class ProductosUI extends CI_Controller
     {
         $this->load->view('productos');
     }
+    
+    public function productoAlta()
+    {
+        $this->load->view('productos_alta_edicion');
+    }
+    
+    public function productoEditar()
+    {
+        
+    }
 }
