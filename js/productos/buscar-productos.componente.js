@@ -26,6 +26,7 @@ Aplicacion.ComponenteBuscarProductos = (() => {
          
         //Carga de eventos de la interfaz.
         uiEntrada.addEventListener('keyup', buscarProductos);
+        uiEntrada.addEventListener('blur', ()=>uiSugerencias.innerHTML = '');
     }
 
     /**

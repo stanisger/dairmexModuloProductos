@@ -13,6 +13,9 @@ Aplicacion.ComponentePaginador = (() => {
         uiTotalDeRegistros,
         uiControlDePaginacion;
     
+    /**
+     * Inicializa la funcionalidad del componente de paginación.
+     */
     function cargarComponente () {
         let componente = '#componente-paginador',
             pagina =  (location.hash
@@ -29,6 +32,9 @@ Aplicacion.ComponentePaginador = (() => {
         cargaPaginador(pagina);
     }
 
+    /**
+     * Agrega acción de escucha de cambios de página sobre el cambio de hash.
+     */
     function escuchaCambioDePagina() {
         window.onhashchange = () =>
             location.hash.match(/#pagina=\d+/ig) 
