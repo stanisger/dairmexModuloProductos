@@ -32,10 +32,16 @@
               </a>
           </li>
            <li>
-
           	   <a href="<?php echo base_url().'Requisicion/requisicion_borrador'; ?>" class="<?php echo (strpos($_SERVER['REQUEST_URI'], 'Requisicion/requisicion_borrador')) ? 'is-active':''; ?>">
             	<i class="fi-page-add colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Requisiciones realizadas</span>
               </a>
+          </li>
+          <li>
+            <a 
+             href="<?= base_url() . 'ProductosUI/index' ?>"
+             class="<?=strpos($_SERVER['REQUEST_URI'], 'ProductosUI/') ? 'is-active':'' ?>">
+            	<i class="fi-page colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Mis productos</span>
+            </a>
           </li>
           <li>
              <a href="<?php echo base_url().'Login/editar/'.$this->session->userdata('id_usuario'); ?>" class="<?php echo (strpos($_SERVER['REQUEST_URI'], 'Login/editar') || strpos($_SERVER['REQUEST_URI'], 'Login/update_user')) ? 'is-active':''; ?>">

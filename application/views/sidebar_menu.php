@@ -15,7 +15,6 @@
                         </button>
                       </div>
           </div>
-
       <!-- menu desktop -->
       <div class="app-dashboard-sidebar-inner bgGrey">
         <ul class="menu vertical">
@@ -35,15 +34,7 @@
                 	<i class="fi-page colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Mis requisiciones</span>
                   </a>
               </li>
-              <li>
-              	  <a 
-              	   href="<?= base_url() . 'ProductosUI/index' ?>"
-              	   class="<?=strpos($_SERVER['REQUEST_URI'], 'ProductosUI/') ? 'is-active':'' ?>">
-                	<i class="fi-page colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Mis productos</span>
-                  </a>
-              </li>
                <li>
-
               	   <a href="<?php echo base_url().'Requisicion/nueva_requisicion'; ?>" class="<?php echo (strpos($_SERVER['REQUEST_URI'], 'Requisicion/nueva_requisicion')) ? 'is-active':''; ?>">
                 	<i class="fi-page-add colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Nueva requisición</span>
                   </a>
@@ -61,6 +52,13 @@
                      <a href="<?php echo base_url().'Requisicion/requisicion_borrador'; ?>" class="<?php echo (strpos($_SERVER['REQUEST_URI'], 'Requisicion/requisicion_borrador')) ? 'is-active':''; ?>">
                     <i class="fi-page-add colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Requisiciones realizadas</span>
                     </a>
+                </li>
+                <li>
+              	  <a 
+              	   href="<?= base_url() . 'ProductosUI/index' ?>"
+              	   class="<?=strpos($_SERVER['REQUEST_URI'], 'ProductosUI/') ? 'is-active':'' ?>">
+                	<i class="fi-page colorBlueDark"></i><span class="app-dashboard-sidebar-text bold">Mis productos</span>
+                  </a>
                 </li>
           <?php  
                 } 
