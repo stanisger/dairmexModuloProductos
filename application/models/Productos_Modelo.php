@@ -38,10 +38,10 @@ class Productos_Modelo extends CI_Model
      * 
      * @return Integer Número total de registros.
      */
-    public function totalDeRegistros()
+    public function totalDeRegistros($nombre)
     {
         return ['total' => $this->db->query(
-            'select * from productos'
+            "select * from productos where nombre like '%{$nombre}%'"
         )->num_rows()];
     }
     
@@ -120,6 +120,7 @@ class Productos_Modelo extends CI_Model
         }
         
         $this->db->like('nombre', $nombre);
+        $this->db->limit(5);
         
         return [
             'productos' => $this->db->get('productos')->result()

@@ -26,8 +26,10 @@ class ProductosAPI extends CI_Controller
     
     /***/
     public function totalDeRegistros() {
+        $consulta  = $this->input->get();
+        
         jsonRespuesta(
-            $this->Productos_Modelo->totalDeRegistros()
+            $this->Productos_Modelo->totalDeRegistros($consulta['nombre'])
         );
     }
     

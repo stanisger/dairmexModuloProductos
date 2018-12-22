@@ -20,7 +20,7 @@ Aplicacion.ServicioProductos = (() => {
          * @param  {string}  nombre    Filtro por nombre.
          * @return {Promise} Productos obtenidos. 
          */
-        paginador(pagina, elementos, nombre='') {
+        paginador(pagina, elementos, nombre) {
             return fetch(
               `${API_URL}/paginador`
               +`?pagina=${pagina}`
@@ -30,12 +30,11 @@ Aplicacion.ServicioProductos = (() => {
             .then(res => res.productos);
         },
         
-
         /**
          * Establece el total de elementos a páginar. 
          */
-        totalDeRegistros() {
-            return fetch(`${API_URL}/totalderegistros`)
+        totalDeRegistros(nombre) {
+            return fetch(`${API_URL}/totalderegistros?nombre=${nombre}`)
             .then(res => res.json())
             .then(res => res.total)
         },

@@ -21,11 +21,13 @@ Aplicacion.ComponenteBuscarProductos = (() => {
         let componente = '#componente-buscar-productos';
 
         //Carga referencias de los elementos de la interfaz.
-        uiEntrada     = document.querySelector(`${componente} > input`);
-        uiSugerencias = document.querySelector(`${componente} > ul`);
+        uiEntrada     = document.querySelector(`${componente} input`);
+        uiSugerencias = document.querySelector(`${componente} ul`);
+        uiBotonBuscar = document.querySelector(`${componente} button`);
 
         //Carga de eventos de la interfaz.
-        uiEntrada.addEventListener('keyup', buscarProductos);
+        uiBotonBuscar.addEventListener('click', buscarProductos);
+        uiEntrada.addEventListener('keyup', obtenerSugerencias);
         uiEntrada.addEventListener('blur',  () => setTimeout(
             () => uiSugerencias.innerHTML = '', 100
           )
@@ -33,11 +35,26 @@ Aplicacion.ComponenteBuscarProductos = (() => {
     }
 
     /**
+     * Cambia los parametros de la sección hash(#) de la URL. Lo cual activa el
+     * evento de recarga del paginador.
+     * 
+     * @see Aplicacion.ComponentePaginador.escuchaCambioDeParametros
+     */
+    function buscarProductos() {
+        location.hash = `#pagina=1&nombre=${uiEntrada.value}`;
+    }
+
+    /**
      * Ejecuta la acción de buscar mediante la API REST de productos los
      * productos cuyo nombre es parecido al que se introdujo como entrada
      * del usuario.
      */
-    function buscarProductos () {
+    function obtenerSugerencias (evento) {
+        if (evento.key === "Enter") {
+            renderSugerencias([]);
+            buscarProductos();
+            return;
+        }
         ServicioProductos
         .obtenerPorNombre(uiEntrada.value)
         .then(productos => renderSugerencias(productos));
@@ -54,7 +71,7 @@ Aplicacion.ComponenteBuscarProductos = (() => {
         uiSugerencias.innerHTML = productos
           .map( ({id_producto, nombre}) => `
             <li
-              onclick="location.href='productoalta#id=${id_producto}'"
+              onclick="location.href='editar#id=${id_producto}'"
               class="list-group-item">${nombre}
             </li>`)
           .join('');

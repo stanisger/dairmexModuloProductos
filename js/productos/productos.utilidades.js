@@ -42,7 +42,7 @@ Aplicacion.Utilidades = {
       //Cálculo de límites.
       var limiteInferior = indiceActual - Math.floor( mostrarIndices/2 );
       var limiteSuperior = indiceActual + Math.floor( mostrarIndices/2 );
-
+      
       //Corrección de desfase del límite inferior.
       if (limiteInferior <= 0) {
         limiteInferior = 1;
@@ -56,5 +56,25 @@ Aplicacion.Utilidades = {
 
       //Generación de índices.
       return this.generarEnteros(limiteInferior, limiteSuperior);
-    }
+    },
+
+    /**
+     * Obtiene los parámetros de la URL pasando la sección de hash (#).
+     * 
+     * @return {Object} Parametros de hash en forma de objeto. 
+     */
+    parametrosEnHash() {
+        try {
+          return location.hash
+          .split('#')[1]
+          .split('&')
+          .reduce( (acc, param) => {
+            let [llave, valor] = param.split('=');
+            acc[llave] = valor;
+            return acc;
+          }, {});
+        } catch (e) {
+            return {};
+        }
+    },
 };

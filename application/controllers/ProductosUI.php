@@ -2,7 +2,7 @@
 class ProductosUI extends CI_Controller
 {
     /**
-     *  Inicializa los datos de sesión y la base de datos.
+     *  Inicializa los datos de sesiï¿½n y la base de datos.
      */
     public function __construct()
     {
@@ -16,20 +16,20 @@ class ProductosUI extends CI_Controller
     
     
     /**
-     * Vista principal del módulo de productos.
+     * Vista principal del mï¿½dulo de productos.
      */
     public function index()
     {
         $this->load->view('productos');
     }
     
-    public function productoAlta()
+    public function alta()
     {
         $this->load->view('productos_alta_edicion');
     }
     
-    public function productoEditar()
+    public function editar()
     {
-        
+        $this->load->view('productos_alta_edicion');
     }
 }
