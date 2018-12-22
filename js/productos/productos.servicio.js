@@ -9,7 +9,7 @@ var Aplicacion = Aplicacion || {};
  */
 Aplicacion.ServicioProductos = (() => {
     
-    const API_URL = `${location.origin}/productosapi`;
+    const API_URL = `${location.origin}/dairmex/dairmexModuloProductos/productosapi`;
     
     return {
         /**

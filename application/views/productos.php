@@ -12,27 +12,39 @@
 
         <!--CONTENT MODULE-->
         <div id="modulo-productos" class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+         
+         <h3 class="font2 colorFont light title-products">Mis Productos</h3>
 
-          <div id="componente-buscar-productos" style="position: absolute; width: calc(100% - 64px);">
-            <div class="input-group input-group-rounded" style="margin-bottom: 0;">
-              <input class="input-group-field" type="search" placeholder="Buscar producto">
-              <div class="input-group-button">
-                <button type="button" class="button bgBlueStrong" style="height: 100%;"><i class="fi-magnifying-glass"></i></button>
-              </div>
+          <div id="componente-buscar-productos"  class="search-products grid-x grid-margin-x">
+           
+          <div class="cell small-8">
+                <div class="input-group input-group-rounded">
+                  <input class="input-group-field" type="search" placeholder="Buscar producto">
+                  <div class="input-group-button">
+                    <button type="button" class="button bgBlueStrong" style="height: 100%;"><i class="fi-magnifying-glass"></i></button>
+                  </div>
+                </div>
+                <ul class="list-group list-products" style="margin-left: 0;"></ul>
             </div>
-            <ul class="list-group" style="margin-left: 0;"></ul>
+            
+            <div class="cell small-4"> 
+             <a href="alta" class="button right w100 plus-product">Añadir producto <i class="fi-plus"></i></a>
+            </div>
+
           </div>
 
-          <div id="componente-paginador">
-            <h5 style="margin-top: 9vh;"></h5>
 
-            <table style="margin-top: 3vh;">
+          <div id="componente-paginador" class="componente-paginador">
+            <h5 class="font2 colorFont light"></h5>
+
+            <table >
               <thead>
                 <tr>
+       
                   <th>Producto</th>
                   <th>Piezas</th>
                   <th>Categoría</th>
-                  <th>Editar</th>
+                  <th class="btn-table">Editar</th>
                 </tr>
               </thead>
               <tbody></tbody>
@@ -42,10 +54,7 @@
               <ul class="pagination text-center"></ul>
             </nav>
           </div>
-          
-          <div class="panel clearfix">
-            <a href="alta" class="button right">Añadir producto</a>
-          </div>
+        
 	    </div>
 	    
       </div>

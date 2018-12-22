@@ -76,11 +76,12 @@ Aplicacion.ComponentePaginador = (() => {
               <td>${cantidad} PZ</td>
               <td>${categoria}</td>
               <td>
-                <button
+                <a
                   onclick="location.href='editar#id=${id_producto}'"
-                  class="button bgBlueStrong">
+                  >
+                  <i class="  icon  fi-pencil colorBlueDark"></i>
                   Editar
-                </button>
+                </a>
               </td>
             </tr>`)
         .join('');

@@ -1,14 +1,14 @@
 CREATE DATABASE dairmexc_crm_db;
 use dairmexc_crm_db;
 
--- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
+#-- phpMyAdmin SQL Dump
+#-- version 4.7.7
+#-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 18-11-2018 a las 19:17:08
--- Versión del servidor: 10.1.35-MariaDB-cll-lve
--- Versión de PHP: 5.6.30
+#-- Servidor: localhost:3306
+#-- Tiempo de generación: 18-11-2018 a las 19:17:08
+#-- Versión del servidor: 10.1.35-MariaDB-cll-lve
+#-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -51,13 +51,13 @@ CREATE TABLE `precios_de_proveedores` (
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `dairmexc_crm_db`
+#-- Base de datos: `dairmexc_crm_db`
 --
 
--- --------------------------------------------------------
+#-- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalle_requisicion`
+#-- Estructura de tabla para la tabla `detalle_requisicion`
 --
 
 CREATE TABLE `detalle_requisicion` (
@@ -73,9 +73,9 @@ CREATE TABLE `detalle_requisicion` (
   `fecha_estatus` datetime NOT NULL,
   `fecha_entrega` varchar(10) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-<
+
 --
--- Volcado de datos para la tabla `detalle_requisicion`
+#-- Volcado de datos para la tabla `detalle_requisicion`
 --
 
 INSERT INTO `detalle_requisicion` (`id`, `articulo`, `medida`, `cantidad`, `proyecto`, `comentarios`, `folio`, `requesicion_id`, `estatus`, `fecha_estatus`, `fecha_entrega`) VALUES
@@ -2897,11 +2897,11 @@ INSERT INTO `detalle_requisicion` (`id`, `articulo`, `medida`, `cantidad`, `proy
 (3805, 'coples de pcs al pcs', '1&quot;', '10', 'cury', '', 'RE00-632', 632, 0, '0000-00-00 00:00:00', NULL),
 (3806, 'abrasadera de unicanal', '2&quot;', '200', 'cury', '', 'RE00-632', 632, 0, '0000-00-00 00:00:00', NULL);
 
--- --------------------------------------------------------
+#-- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `requisicion`
---
+#--
+#-- Estructura de tabla para la tabla `requisicion`
+#--
 
 CREATE TABLE `requisicion` (
   `id` int(11) NOT NULL,
@@ -2912,9 +2912,9 @@ CREATE TABLE `requisicion` (
   `fecha_estatus` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `requisicion`
---
+#--
+#-- Volcado de datos para la tabla `requisicion`
+#--
 
 INSERT INTO `requisicion` (`id`, `autor`, `fecha`, `estatus`, `estatus_req`, `fecha_estatus`) VALUES
 (1, 1, '2017-09-05 14:00:03', 1, 0, NULL),
@@ -3550,11 +3550,11 @@ INSERT INTO `requisicion` (`id`, `autor`, `fecha`, `estatus`, `estatus_req`, `fe
 (631, 12, '2018-11-12 18:31:24', 1, 0, NULL),
 (632, 5, '2018-11-16 10:34:47', 1, 0, NULL);
 
--- --------------------------------------------------------
+#-- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `users`
---
+#--
+##-- Estructura de tabla para la tabla `users`
+#--
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
@@ -3570,9 +3570,9 @@ CREATE TABLE `users` (
   `activo` tinyint(4) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `users`
---
+#--
+##-- Volcado de datos para la tabla `users`
+#--
 
 INSERT INTO `users` (`id`, `perfil`, `nombre`, `apaterno`, `empresa`, `telefono`, `email`, `username`, `password`, `registro`, `activo`) VALUES
 (1, 'suscriptor', 'pablo', 'maya jimenez', 'tecno-pro.com.mx', '5570739347', 'contacto@tecno-pro.com.mx', 'pablo', 'd52ef20e306b8aff53a89e9d2f928ad7c5f2a66d', '2017-09-05', 1),
@@ -3590,54 +3590,54 @@ INSERT INTO `users` (`id`, `perfil`, `nombre`, `apaterno`, `empresa`, `telefono`
 (13, 'suscriptor', 'RAFE', 'ESTA', 'CODE', '8727272772', 'glopez@nearshoremx.com', 'RAFE', 'eac483308fbafac96a7c56c893ec0a9a20c38fe0', '2018-10-26', 1),
 (14, 'suscriptor', 'Gersain Estanaislao', 'lópez', 'CodeHaus', '5520246997', 'stanisger@gmail.com', 'Gersain Estanaislao', 'a04e64e478a93387c74ebe4329fe957c4df13fae', '2018-11-18', 1);
 
---
--- Índices para tablas volcadas
---
+#--
+##-- Índices para tablas volcadas
+#--
 
---
--- Indices de la tabla `detalle_requisicion`
---
+#--
+##-- Indices de la tabla `detalle_requisicion`
+#--
 ALTER TABLE `detalle_requisicion`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `requisicion`
---
+#--
+##-- Indices de la tabla `requisicion`
+#--
 ALTER TABLE `requisicion`
   ADD PRIMARY KEY (`id`);
 
---
--- Indices de la tabla `users`
---
+#--
+##-- Indices de la tabla `users`
+#--
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT de las tablas volcadas
---
+#--
+##-- AUTO_INCREMENT de las tablas volcadas
+#--
 
---
--- AUTO_INCREMENT de la tabla `detalle_requisicion`
---
+#--
+##-- AUTO_INCREMENT de la tabla `detalle_requisicion`
+#--
 ALTER TABLE `detalle_requisicion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3807;
 
---
--- AUTO_INCREMENT de la tabla `requisicion`
---
+#--
+##-- AUTO_INCREMENT de la tabla `requisicion`
+#--
 ALTER TABLE `requisicion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=633;
 
---
--- AUTO_INCREMENT de la tabla `users`
---
+#--
+##-- AUTO_INCREMENT de la tabla `users`
+#--
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+#/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+#/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+#/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 create user dairmexc_crm_usr@localhost identified by 'oa+_9_tF!a~@';
 grant all privileges on dairmexc_crm_db.* to dairmexc_crm_usr@localhost;
