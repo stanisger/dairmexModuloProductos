@@ -31,7 +31,15 @@ Aplicacion.ServicioProductos = (() => {
         },
         
         /**
-         * Establece el total de elementos a páginar. 
+         * Establece el total de elementos a páginar.
+         * 
+         * @param   {string} nombre Este parámetro establece que el total de
+         *                          productos se calcule para el número de productos
+         *                          cuyo nombre sea parecido al que se pasa como
+         *                          argumento, cuando se pasa una cadena vacía
+         *                          entonces el cálculo se efectua sobre el total
+         *                          de productos registrados en la base de datos.
+         * @returns {Promise} Promesa con el total de productos. 
          */
         totalDeRegistros(nombre) {
             return fetch(`${API_URL}/totalderegistros?nombre=${nombre}`)
@@ -51,6 +59,56 @@ Aplicacion.ServicioProductos = (() => {
               `${API_URL}/obtenerpornombre?nombre=${nombre}`)
             .then(res => res.json())
             .then(res => res.productos);
+        },
+
+        /**
+         * Da de alta nuevos productos en la base de datos.
+         * 
+         * @param  {Boject}  producto Producto a registrar.
+         * @return {Promise} Producto registrado en la base de datos.
+         */
+        alta(producto) {
+            return fetch(
+              `${API_URL}/alta`, {
+                  method: 'POST',
+                  body: JSON.stringify({productos: [producto]}),
+                  headers: {'Content-Type': 'application/json'}
+              })
+            .then(res => res.json())
+            .then(res => res.productos.pop())
+        },
+
+        /**
+         * Modifica los datos de algún producto ya registrado.
+         * 
+         * @param  {Object}  producto Producto a actualizar.
+         * @return {Promise} Promesa con los datos del producto
+         *                   ya completamente modificado. 
+         */
+        actualizar(producto) {
+            return fetch(
+              `${API_URL}/actualizar`, {
+                  method: 'PUT',
+                  body: JSON.stringify({productos: [producto]}),
+                  headers: {'Content-Type': 'application/json'}
+              })
+            .then(res => res.json())
+            .then(res => res.productos.pop());
+        },
+
+        /**
+         * Elimina un producto registrado en el sistema.
+         * 
+         * @param {number} identificador Identificador del producto que se eliminará.
+         * @return {Promise} Promesa con los datos del producto eliminado
+         */
+        eliminar(identificador) {
+            return fetch(
+              `${API_URL}/eliminar?identificadores[]=${identificador}`, {
+                  method: 'DELETE'
+              })
+            .then(res => res.json())
+            .then(res => res.productos.pop());
         }
     }
 })();
