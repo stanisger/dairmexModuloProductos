@@ -1,6 +1,7 @@
 var Aplicacion = Aplicacion || {};
+    Aplicacion.Servicios = Aplicacion.Servicios || {};
 
-Aplicacion.ServicioPreciosDeProveedores(() => {
+Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
    const API_URL = `${location.origin}/preciosdeproveedoresapi`;
    
    return {

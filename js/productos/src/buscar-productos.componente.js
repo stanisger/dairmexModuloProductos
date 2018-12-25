@@ -7,9 +7,9 @@ var Aplicacion = Aplicacion || {};
  * @author Ricardo Bermúdez Bermúdez
  * @since  Dec 18th, 2018.
  */
-Aplicacion.ComponenteBuscarProductos = (() => {
+( componente => componente().cargarComponente() ) ( function () {
 
-    let { ServicioProductos } = Aplicacion;
+    let { ServicioProductos } = Aplicacion.Servicios;
     let uiEntrada;
     let uiSugerencias;
 
@@ -37,8 +37,6 @@ Aplicacion.ComponenteBuscarProductos = (() => {
     /**
      * Cambia los parametros de la sección hash(#) de la URL. Lo cual activa el
      * evento de recarga del paginador.
-     * 
-     * @see Aplicacion.ComponentePaginador.escuchaCambioDeParametros
      */
     function buscarProductos() {
         location.hash = `#pagina=1&nombre=${uiEntrada.value}`;
@@ -78,4 +76,4 @@ Aplicacion.ComponenteBuscarProductos = (() => {
     }
 
     return {cargarComponente}
-})();
+});

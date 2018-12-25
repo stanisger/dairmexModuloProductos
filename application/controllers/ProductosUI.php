@@ -25,11 +25,11 @@ class ProductosUI extends CI_Controller
     
     public function alta()
     {
-        $this->load->view('productos_alta_edicion');
+        $this->load->view('productos_alta_edicion', ["modo" => "alta"]);
     }
     
     public function editar()
     {
-        $this->load->view('productos_alta_edicion');
+        $this->load->view('productos_alta_edicion', ["modo" => "edicion"]);
     }
 }

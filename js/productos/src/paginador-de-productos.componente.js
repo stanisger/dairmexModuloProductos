@@ -1,11 +1,20 @@
 var Aplicacion = Aplicacion || {};
 
-Aplicacion.ComponentePaginador = (() => {
-    //Módulos importados.
-    let { ServicioProductos, Utilidades } = Aplicacion;
+/**
+ * Este módulo encapsula el funcionamiento del Componente de Paginación de Productos.
+ * 
+ * Este componente requiere que se le comuniquen dos variables desde el Componente de
+ * Búsqueda de Productos: pagina y nombre. Para lograr estacomunicación de variables
+ * se cambia el estado de la sección hash de la URL con los datos de estas variables.
+ * 
+ * @author Ricardo Bermúdez Bermúdez
+ * @since  !8 de Diciembre del 2018.
+ */
+( componente => componente().cargarComponente() ) ( function () {
 
-    //Variables de control del paginador.
-    const REGISTROS_POR_PAGINA     = 5;
+    //Módulos importados.
+    let { ServicioProductos } = Aplicacion.Servicios;
+    let { HerramientaPaginador, HerramientaHash } = Aplicacion.Herramientas;
 
     //Referencia de componentes en HTML.
     let uiContenido,
@@ -33,8 +42,13 @@ Aplicacion.ComponentePaginador = (() => {
      * necesita el componente.
      */
     function cargaParametros() {
-        let { pagina = 1, nombre = '' } = Utilidades.parametrosEnHash();
-        return { pagina: parseInt(pagina), nombre };
+        let { pagina = 1, nombre = '', registrosPorPagina = 5 } = HerramientaHash.parametrosEnHash();
+        
+        return {
+            pagina: parseInt(pagina),
+            nombre,
+            registrosPorPagina: parseInt(registrosPorPagina)
+        };
     }
 
     /**
@@ -44,20 +58,32 @@ Aplicacion.ComponentePaginador = (() => {
         window.onhashchange = () => cargaPaginador( cargaParametros() );
     }
 
-    function cargaPaginador( {pagina, nombre} ) {
-        //Recarga el total de productos y el contrrol de paginación
+    /**
+     * Carga o recarga en caso de cambios(de página o parámetros de búsqueda) los
+     * registros a mostrar en el paginador. Recibe parámetros por destructuring.
+     * 
+     * @param {number} Pagina No. de página del paginador.
+     * @param {string} nombre Referencia de nombre de productos buscados.
+     */
+    function cargaPaginador( {pagina, nombre, registrosPorPagina} ) {
+        //Recarga el total de productos y el control de paginación
         ServicioProductos
         .totalDeRegistros(nombre)
         .then(totalDeElementos => 
              renderEncabezado(totalDeElementos)
-          || renderControlDePaginacion(totalDeElementos, pagina, nombre));
+          || renderControlDePaginacion(totalDeElementos, pagina, registrosPorPagina, nombre));
 
         //Obtiene productos desde el servicio de paginación
         ServicioProductos
-        .paginador(pagina, REGISTROS_POR_PAGINA, nombre)
+        .paginador(pagina, registrosPorPagina, nombre)
         .then(productos => renderListaDeProductos(productos));
     }
     
+    /**
+     * Muestra en la interfaz de usuario el total de registros del paginador.
+     * 
+     * @param {number|string} totalDeElementos Numero total de elementos del paginador.
+     */
     function renderEncabezado(totalDeElementos) {
         if (totalDeElementos) {
           uiTotalDeRegistros.innerHTML = `Total de productos: ${totalDeElementos}`;
@@ -66,7 +92,12 @@ Aplicacion.ComponentePaginador = (() => {
           uiTotalDeRegistros.innerHTML =`Sin productos registrados`;
         }
     }
-    
+
+    /**
+     * Muestra en la interfaz de usuario los registros del paginador.
+     * 
+     * @param {Array} productos Registros a mostrar en determinada página del paginador.
+     */
     function renderListaDeProductos(productos) {
         uiContenido.innerHTML = productos
         .map(
@@ -79,7 +110,7 @@ Aplicacion.ComponentePaginador = (() => {
                 <a
                   onclick="location.href='editar#id=${id_producto}'"
                   >
-                  <i class="  icon  fi-pencil colorBlueDark"></i>
+                  <i class="icon fi-pencil colorBlueDark"></i>
                   Editar
                 </a>
               </td>
@@ -87,9 +118,17 @@ Aplicacion.ComponentePaginador = (() => {
         .join('');
     }
 
-    function renderControlDePaginacion(totalDeElementos, pagina, nombre) {
+    /**
+     * Muestra en la interfaz de usuario los indices de paginación.
+     * 
+     * @param {number} totalDeElementos   No. total de elementos del paginador.
+     * @param {number} pagina             Pagina actual del paginador.
+     * @param {number} registrosPorPagina No. de registros por página.
+     * @param {string} nombre             Referencia de la búsqueda por nombre de los productos.
+     */
+    function renderControlDePaginacion(totalDeElementos, pagina, registrosPorPagina, nombre) {
         let noDePáginas = Math.ceil(
-          totalDeElementos/REGISTROS_POR_PAGINA
+          totalDeElementos/registrosPorPagina
         );
 
         uiControlDePaginacion.innerHTML = `
@@ -99,7 +138,7 @@ Aplicacion.ComponentePaginador = (() => {
                :`class="unavailable"`}>
                &laquo; </a>
           </li>
-          ${Utilidades
+          ${HerramientaPaginador
             .generadorDeIndices(noDePáginas, 5, pagina)
             .map(
               indice => indice==pagina
@@ -115,4 +154,4 @@ Aplicacion.ComponentePaginador = (() => {
     }
 
     return {cargarComponente};
-})();
+});

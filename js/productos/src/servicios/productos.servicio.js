@@ -1,4 +1,5 @@
 var Aplicacion = Aplicacion || {};
+    Aplicacion.Servicios = Aplicacion.Servicios || {};
 
 /**
  * Servicio de acceso a los productos. Integración de la API REST de
@@ -7,9 +8,9 @@ var Aplicacion = Aplicacion || {};
  * Se utiliza la API de Fetch para realizar las peticiones AJAX a los
  * servicios de productos.
  */
-Aplicacion.ServicioProductos = (() => {
+Aplicacion.Servicios.ServicioProductos = (() => {
     
-    const API_URL = `${location.origin}/dairmex/dairmexModuloProductos/productosapi`;
+    const API_URL = `${location.origin}/productosapi`;
     
     return {
         /**

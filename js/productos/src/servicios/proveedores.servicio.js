@@ -1,4 +1,5 @@
 var Aplicacion = Aplicacion || {};
+    Aplicacion.Servicios = Aplicacion.Servicios || {};
 
 /**
  * Servicio de acceso a los proveedores. Integración de la API REST de
@@ -7,7 +8,7 @@ var Aplicacion = Aplicacion || {};
  * @author Ricardo Bermúdez Bermúdez
  * @since  22 de diciembre del 2018.
  */
-Aplicacion.ServicioProveedores = (() => {
+Aplicacion.Servicios.ServicioProveedores = (() => {
 
     const API_URL = `${location.origin}/proveedoresapi`;
 
