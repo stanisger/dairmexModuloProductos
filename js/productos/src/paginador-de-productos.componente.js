@@ -12,9 +12,10 @@ var Aplicacion = Aplicacion || {};
  */
 ( componente => componente().cargarComponente() ) ( function () {
 
-    //Módulos importados.
-    let { ServicioProductos } = Aplicacion.Servicios;
+    //Módulos importados.                           //Desde ...
+    let { ServicioProductos }                     = Aplicacion.Servicios;
     let { HerramientaPaginador, HerramientaHash } = Aplicacion.Herramientas;
+    let { Mensajes, AnimacionDeEspera }           = Aplicacion.InterfazDeUsuario;
 
     //Referencia de componentes en HTML.
     let uiContenido,
@@ -66,17 +67,57 @@ var Aplicacion = Aplicacion || {};
      * @param {string} nombre Referencia de nombre de productos buscados.
      */
     function cargaPaginador( {pagina, nombre, registrosPorPagina} ) {
-        //Recarga el total de productos y el control de paginación
-        ServicioProductos
-        .totalDeRegistros(nombre)
-        .then(totalDeElementos => 
-             renderEncabezado(totalDeElementos)
-          || renderControlDePaginacion(totalDeElementos, pagina, registrosPorPagina, nombre));
+        AnimacionDeEspera.activar();
 
-        //Obtiene productos desde el servicio de paginación
+        Promise.all([
+          //Recarga el total de productos y el control de paginación
+          ServicioProductos
+          .totalDeRegistros(nombre)
+          .then(totalDeElementos => 
+               renderEncabezado(totalDeElementos)
+            || renderControlDePaginacion(totalDeElementos, pagina, registrosPorPagina, nombre)),
+
+          //Obtiene productos desde el servicio de paginación
+          ServicioProductos
+          .paginador(pagina, registrosPorPagina, nombre)
+          .then(productos => renderListaDeProductos(productos))
+        ]
+        ).catch(  e => Mensajes.error(5,'Ocurrio un error al cargar el paginador.'))
+        .finally(() => AnimacionDeEspera.desactivar());
+    }
+
+    function eliminarProducto(idProducto) {
         ServicioProductos
-        .paginador(pagina, registrosPorPagina, nombre)
-        .then(productos => renderListaDeProductos(productos));
+        .obtener(idProducto)
+        .then( producto => {
+          if(!producto) {
+            Mensajes.error(5,'El producto solicitado no existe.')
+            setTimeout(() => location.reload(), 3000)
+            return;
+          }
+          if (!confirm(`¿Desea eliminar el producto ${producto.nombre}?`)) {
+            return;
+          }
+          
+          AnimacionDeEspera.activar();
+          ServicioProductos
+          .eliminar(producto.id_producto)
+          .then(producto => {
+            Mensajes.correcto(5,`El producto ${producto.nombre} se elimino correctamente.`);
+          })
+          .catch(e => Mensajes.error(5,`Ocurrio un problema al eliminar el producto ${producto.nombre}`))
+          .finally(()=>setTimeout(() => location.reload(), 2000))
+        })
+        .catch(e=> Mensajes.error(4,'No se pudieron obtener los datos del producto.'));
+    }
+
+    function cargarAccionEliminar(nodos) {
+      for(var i=0;i<nodos.length;i++) {
+        nodos[i].addEventListener('click', (e)=>{
+          let idProducto = e.target.id.split('-')[1];
+          eliminarProducto(idProducto);
+        });
+      };
     }
     
     /**
@@ -101,21 +142,33 @@ var Aplicacion = Aplicacion || {};
     function renderListaDeProductos(productos) {
         uiContenido.innerHTML = productos
         .map(
-          ({nombre, cantidad, categoria, id_producto}) => `
+          ({nombre, cantidad, categoria, id_producto, extension_imagen}) => `
             <tr>
-              <td>${nombre}</td>
+              <td>
+               ${extension_imagen
+                 ?`<img class="imagen-redondeada"
+                   src="/img/subidas/p-${id_producto}.${extension_imagen}">`
+                 :''}
+              ${nombre}
+              </td>
               <td>${cantidad} PZ</td>
               <td>${categoria}</td>
               <td>
                 <a
-                  onclick="location.href='editar#id=${id_producto}'"
-                  >
+                  onclick="location.href='editar#id=${id_producto}'">
                   <i class="icon fi-pencil colorBlueDark"></i>
                   Editar
+                </a>
+                <a
+                  id="e-${id_producto}">
+                  <i class="icon fi-x colorBlueDark"></i>
+                  Eliminar
                 </a>
               </td>
             </tr>`)
         .join('');
+
+        cargarAccionEliminar(uiContenido.querySelectorAll('a[id^=e-]'));
     }
 
     /**

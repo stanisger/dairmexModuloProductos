@@ -10,10 +10,8 @@
 	    <?php require('sidebar_menu.php')?>
 
         <!--CONTENT MODULE-->
-        <div id="modulo-productos" class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
-         
-         <h3 class="font2 colorFont light title-products">Mis Productos</h3>
-
+        <div class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
+          <h3 class="font2 colorFont light title-products">Mis Productos</h3>
           <div id="componente-buscar-productos"  class="search-products grid-x grid-margin-x">
             <div class="cell small-8">
               <div class="input-group input-group-rounded">
@@ -22,7 +20,7 @@
                   <button type="button" class="button bgBlueStrong"><i class="fi-magnifying-glass"></i></button>
                 </div>
               </div>
-              <ul class="list-group list-products" style="margin-left: 0;"></ul>
+              <ul class="list-group list-products autocomplete-productos"></ul>
             </div>
 
             <div class="cell small-4"> 
@@ -31,8 +29,6 @@
               </a>
             </div>
           </div>
-
-
           <div id="componente-paginador" class="componente-paginador">
             <h5 class="font2 colorFont light"></h5>
             
@@ -58,6 +54,8 @@
 	</div>
 	
 	<!--MODULE SCRIPTS-->
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensajes.componente.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/animacion-de-espera.componente.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/hash.herramienta.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/paginador.herramienta.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>

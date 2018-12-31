@@ -1,3 +1,7 @@
+@import 'modulos/mensajes.css';
+@import 'modulos/animacion-de-espera.css';
+@import 'modulos/autocomplete.css';
+
 .bgBlue {
   background-color: #00c3f2 !important; }
 
@@ -1084,43 +1088,9 @@ td.regularTd{
 
 }
 
-/**
- * ALERTAS.
- * 
- * Estos estilos definen el comportamiento de las alertas;
- * la animaci�n y el dise�o que utilizan al mostrarse.
- */
-.alert-box.success.radius {
-  height: 63px;
-  border-radius: 5px;
-  position:fixed;
-  bottom: 50px; right: 50px;
-  background-color: #43AC6A;
-  border-color: #3a945b;
-  color: #FFFFFF;
-  max-width: 0;
-  transition: max-width 0.45s ease-in-out;
-  overflow: hidden;
+.imagen-redondeada {
+    border-radius: 100px;
+    width:  50px;
+    height: 50px;
+    margin-right: 10px;
 }
-
-.alert-box.success.radius *{
-    display: inline;
-    visibility: hidden;
-}
-
-/**
- * En JavaScript puro (ES2015) se puede utilizar el siguiente codigo
- * para enganchar la clase show y a una alerta y mostrar la animaci�n
- * sobre el ancho: 
- *
- * document.querySelector('.alert-box.success.radius').classList.toggle('show')
- */
-.alert-box.success.radius.show {
-  padding: 20px;
-  max-width: 100vw;
-}
-.alert-box.success.radius.show * { 
-    visibility: visible;
-    transition: visibility 0.2s ease-in 0.35s;    
-}
-

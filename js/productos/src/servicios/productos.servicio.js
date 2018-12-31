@@ -49,6 +49,18 @@ Aplicacion.Servicios.ServicioProductos = (() => {
         },
 
         /**
+         * Obtiene los datos de un producto a tráves de su identificador.
+         * 
+         * @param  {string|number}  identificador.
+         * @return {Promise} Detalles del producto. 
+         */
+        obtener(identificador) {
+            return fetch(`${API_URL}/obtener?identificadores[]=${identificador}`)
+            .then(res => res.json())
+            .then(res => res.productos.pop())
+        },
+
+        /**
          * Obtiene las referencias a productos cuyo nombre sea parecido a
          * la cadena de texto pasada como argumento de la función.
          * 
@@ -76,7 +88,7 @@ Aplicacion.Servicios.ServicioProductos = (() => {
                   headers: {'Content-Type': 'application/json'}
               })
             .then(res => res.json())
-            .then(res => res.productos.pop())
+            .then(res => res.productos.pop());
         },
 
         /**

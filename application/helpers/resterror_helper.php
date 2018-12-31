@@ -38,7 +38,8 @@ function restErrorMetodoNoPermitido()
  */
 function restError($mensaje, $codigoError)
 {
-    header('Content-Type: application/json; charset=UTF-8', $codigoError);
+    header('Content-Type: application/json; charset=UTF-8');
+    http_response_code($codigoError);
     
     echo json_encode([
        'codigo' => $codigoError,

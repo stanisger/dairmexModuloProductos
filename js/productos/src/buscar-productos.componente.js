@@ -66,11 +66,17 @@ var Aplicacion = Aplicacion || {};
      * @param {Array<string>} nombres Lista de nombres de productos.
      */
     function renderSugerencias(productos) {
+        console.log(productos)
         uiSugerencias.innerHTML = productos
-          .map( ({id_producto, nombre}) => `
+          .map( ({id_producto, nombre, extension_imagen}) => `
             <li
               onclick="location.href='editar#id=${id_producto}'"
-              class="list-group-item">${nombre}
+              class="list-group-item">
+              ${extension_imagen
+               ?`<img class="imagen-redondeada"
+                   src="/img/subidas/p-${id_producto}.${extension_imagen}">`
+               :''}
+              ${nombre}
             </li>`)
           .join('');
     }

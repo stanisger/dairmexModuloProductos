@@ -61,10 +61,7 @@ class Productos_Modelo extends CI_Model
         $nombre      = !empty($consulta['nombre'])    ? $consulta['nombre']    : '';
         
         $this->db
-        ->select('id_producto')
-        ->select('nombre')
-        ->select('cantidad')
-        ->select('categoria')
+        ->select('*')
         ->from('productos')
         ->order_by('id_producto', 'DESC')
         ->like('nombre', $nombre);

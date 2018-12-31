@@ -1,0 +1,8 @@
+.list-group {
+    margin-left: 0;
+}
+
+.list-group.autocomplete-productos {
+    width: calc(66.66667% - 1.875rem) !important;
+    position: absolute;
+}
