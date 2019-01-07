@@ -1,10 +1,9 @@
-var Aplicacion = Aplicacion || {};
-
-(componente => componente().cargarComponente() ) ( function () {
-    let { Mensajes, AnimacionDeEspera, Textos } = Aplicacion.InterfazDeUsuario;
-    let { ServicioProductos, ServicioArchivos } = Aplicacion.Servicios;
-    let { ImagenABase64, Formulario }           = Aplicacion.Herramientas;
-    let { ComponenteProveedores }               = Aplicacion.Componentes;
+( function () {
+    //Importar                                     //Desde ...
+    let { Mensajes, AnimacionDeEspera, Textos }  = Aplicacion.InterfazDeUsuario;
+    let { ServicioProductos, ServicioArchivos }  = Aplicacion.Servicios;
+    let { ArchivoABase64, Formulario }           = Aplicacion.Herramientas;
+    let { ComponenteProveedores }                = Aplicacion.Componentes;
 
     //Componentes de la Interfaz de Usuario.
     let uiFormularioProducto, uiEntradaImagen, uiMostrarImagen, uiBotonImagen;
@@ -13,7 +12,7 @@ var Aplicacion = Aplicacion || {};
     /**
      * Inicializa el componente.
      */
-    function cargarComponente() {
+    (function cargarComponente() {
         uiFormularioProducto = document.querySelector('#producto');
         uiEntradaImagen = uiFormularioProducto.elements.imagen;
         uiMostrarImagen = document.querySelector('#contenedor-imagen');
@@ -24,20 +23,21 @@ var Aplicacion = Aplicacion || {};
         uiFormularioProducto.addEventListener('submit', altalDeProducto);
         
         ComponenteProveedores.cargarComponente();
-    }
+    })();
 
     function cargarImagen() {
         var referenciaDeArchivo = uiEntradaImagen.files[0];
 
-        if (!ImagenABase64.formatoValido(referenciaDeArchivo)) {
+        if (!ArchivoABase64.validarImagen(referenciaDeArchivo)) {
+            uiEntradaImagen.value=null;
             datosImagen = {};
             uiMostrarImagen.src = '';
             Mensajes.error(6, Textos.errorDeFormato);
             return;
         }
         
-        ImagenABase64
-        .cargarImagen(referenciaDeArchivo)
+        ArchivoABase64
+        .cargarArchivo(referenciaDeArchivo)
         .then( imagen => datosImagen = imagen)
         .then( imagen =>
           uiMostrarImagen
@@ -45,23 +45,28 @@ var Aplicacion = Aplicacion || {};
                + `${imagen.contenido}` );
     }
 
+    function cargarProducto() {
+        return {
+          ...Formulario.obtenerCampos(
+              ['nombre', 'medida', 'unidad_medida', 'categoria', 'cantidad'],
+              uiFormularioProducto
+          ),
+          extension_imagen: datosImagen.extension,
+          proveedores: ComponenteProveedores.obtenerDatosDeProveedores()
+        };
+    }
+
     /**
      * Envia producto a API REST para registrarlo en la base de datos.
      */
     function altalDeProducto(e) {
         e.preventDefault();
+
         AnimacionDeEspera.activar();
         Mensajes.accion(4, Textos.productoAlta);
 
-        let producto = Formulario.obtenerCampos(
-          ['nombre', 'medida', 'unidad_medida', 'categoria', 'cantidad'],
-          uiFormularioProducto);
-                  
-        producto.extension_imagen = datosImagen.extension;
-        producto.proveedores = ComponenteProveedores.obtenerDatosDeProveedores();
-
         ServicioProductos
-        .alta( producto )
+        .alta( cargarProducto() )
         .then( producto => {
             Mensajes.correcto(4, Textos.productoAltaCorrecta);
             if (!Object.keys(datosImagen).length) {return producto;}
@@ -78,6 +83,4 @@ var Aplicacion = Aplicacion || {};
           location.href='index';
         }, 5500 ) );
     }
-
-    return {cargarComponente};
-});
+})();

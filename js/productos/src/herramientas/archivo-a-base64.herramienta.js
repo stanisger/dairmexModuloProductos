@@ -2,7 +2,7 @@
 var Aplicacion = Aplicacion || {};
     Aplicacion.Herramientas = Aplicacion.Herramientas || {};
 
-Aplicacion.Herramientas.ImagenABase64 = (function () {
+Aplicacion.Herramientas.ArchivoABase64 = (function () {
 
     function Archivo(archivo, base64) {
         var [nombre, extension]   = archivo.name.split('.'),
@@ -14,7 +14,7 @@ Aplicacion.Herramientas.ImagenABase64 = (function () {
         this.contenido = contenido;
     };
 
-    function cargarImagen(referenciaDeArchivo) {
+    function cargarArchivo(referenciaDeArchivo) {
         return new Promise( (rs, rj) => {
             var fRead = new FileReader();
             fRead.onload  = evt => rs(new Archivo(referenciaDeArchivo, evt.target.result));
@@ -23,10 +23,10 @@ Aplicacion.Herramientas.ImagenABase64 = (function () {
         })
     }
 
-    function formatoValido(referenciaDeArchivo) {
+    function validarImagen(referenciaDeArchivo) {
         return !!referenciaDeArchivo
           && !!referenciaDeArchivo.type.match(/^image/);
     }
     
-    return {cargarImagen, formatoValido}
+    return {cargarArchivo, validarImagen}
 })();

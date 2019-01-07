@@ -52,9 +52,12 @@
 	    
       </div>
 	</div>
-	
+
 	<!--MODULE SCRIPTS-->
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/nucleo/componente.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensaje.componente.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensajes.componente.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/dialogo-de-confirmacion.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/animacion-de-espera.componente.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/hash.herramienta.js"></script>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/paginador.herramienta.js"></script>

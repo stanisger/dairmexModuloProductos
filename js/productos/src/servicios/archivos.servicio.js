@@ -3,11 +3,10 @@ var Aplicacion = Aplicacion || {};
 
 Aplicacion.Servicios.ServicioArchivos = (() => {
     
-    const API_URL = `${location.origin}/archivosapi`;
+    const API_URL = `${location.origin}/crm-b/archivosapi`;
     
     return {
         subirImagen(datosDeImagen) {
-          console.log(datosDeImagen)
           return fetch(`${API_URL}/imagenes`,{
             method: 'POST',
             body: JSON.stringify(datosDeImagen),

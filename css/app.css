@@ -1,6 +1,7 @@
 @import 'modulos/mensajes.css';
 @import 'modulos/animacion-de-espera.css';
 @import 'modulos/autocomplete.css';
+@import 'modulos/modal.css';
 
 .bgBlue {
   background-color: #00c3f2 !important; }

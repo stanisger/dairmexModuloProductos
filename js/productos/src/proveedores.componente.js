@@ -2,7 +2,9 @@ Aplicacion = Aplicacion || {};
 Aplicacion.Componentes = Aplicacion.Componentes || {};
 
 Aplicacion.Componentes.ComponenteProveedores = (function () {
-    let { ComponenteProveedor } = Aplicacion.Componentes;
+    let { ComponenteProveedor }             = Aplicacion.Componentes;
+    let { DialogoDeConfirmacion, Mensajes } = Aplicacion.InterfazDeUsuario;
+    let { ServicioPreciosDeProveedores }    = Aplicacion.Servicios;
 
     //Componentes de la Interfaz de Usuario.
     let uiBotonAgregarProveedor,
@@ -11,10 +13,23 @@ Aplicacion.Componentes.ComponenteProveedores = (function () {
     //Arreglo de proveedores
     let proveedores = [];
 
-    function cargarComponente() {
+    function cargarComponente(proveedoresDefecto = []) {
         uiBotonAgregarProveedor   = document.querySelector('#crear-proveedor');
         uiContenedorDeProveedores = document.querySelector('#contenedor-proveedores');
-        uiBotonAgregarProveedor.addEventListener('click', renderNuevoProveedor)
+        uiBotonAgregarProveedor.addEventListener('click', renderNuevoProveedor);
+
+        cargarProveedoresDefecto(proveedoresDefecto);
+    }
+
+    function cargarProveedoresDefecto(proveedoresDefecto) {
+        proveedoresDefecto.forEach(
+            proveedorPorDefecto => proveedores.push(
+                new ComponenteProveedor(uiContenedorDeProveedores)
+                .establecerDatosDeProveedor(proveedorPorDefecto)
+                .eliminarProveedor(proveedor => eliminarProveedorDeBD(proveedor))
+                .render()
+            )
+        )
     }
 
     function renderNuevoProveedor() {
@@ -25,16 +40,36 @@ Aplicacion.Componentes.ComponenteProveedores = (function () {
      )
     }
 
+    function eliminarProveedorDeBD(cmpProveedor) {
+        let proveedor = cmpProveedor.obtenerDatosDeProveedor();
+        return DialogoDeConfirmacion.preguntar(`¿Deseas eliminar los datos`
+        +` del proveedor <i>${proveedor.nombre}</i> asociados `
+        +`a este producto?`)
+        .then(() => {
+            return ServicioPreciosDeProveedores
+            .eliminar(proveedor.id_precio)
+            .then(()=>{
+                Mensajes.correcto(4,'Datos de proveedor eliminados correctamente.');
+            }).catch( (e) => {
+               console.log(e.message)
+               Mensajes.error(4,'Ocurrió un problema al eliminar los datos de proveedor solicitado.');
+            });
+        });
+    }
+
     function eliminarProveedor(cmpProveedor) {
-        proveedores = proveedores.filter(
+        return new Promise( (rs) => {
+          proveedores = proveedores.filter(
             eleProveedor => eleProveedor != cmpProveedor 
-        );
+          );
+          rs(1);
+        });
     }
 
     function obtenerDatosDeProveedores() {
-        return proveedores.map(
-            proveedor => proveedor.obtenerDatosDeProveedor()
-        )
+        return proveedores
+        .map(proveedor => proveedor.obtenerDatosDeProveedor())
+        .filter(proveedor => !proveedor.id_precio)
     }
 
     return {cargarComponente, obtenerDatosDeProveedores};

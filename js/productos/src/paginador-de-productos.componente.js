@@ -10,25 +10,27 @@ var Aplicacion = Aplicacion || {};
  * @author Ricardo Bermúdez Bermúdez
  * @since  !8 de Diciembre del 2018.
  */
-( componente => componente().cargarComponente() ) ( function () {
+(function () {
 
-    //Módulos importados.                           //Desde ...
-    let { ServicioProductos }                     = Aplicacion.Servicios;
-    let { HerramientaPaginador, HerramientaHash } = Aplicacion.Herramientas;
-    let { Mensajes, AnimacionDeEspera }           = Aplicacion.InterfazDeUsuario;
+    //Módulos importados.                                      //Desde ...
+    let { ServicioProductos }                                  = Aplicacion.Servicios;
+    let { HerramientaPaginador, HerramientaHash }              = Aplicacion.Herramientas;
+    let { Mensajes, AnimacionDeEspera, DialogoDeConfirmacion } = Aplicacion.InterfazDeUsuario;
 
     //Referencia de componentes en HTML.
-    let uiContenido,
+    let uiTabla,
+        uiContenido,
         uiTotalDeRegistros,
         uiControlDePaginacion;
 
     /**
      * Inicializa la funcionalidad del componente de paginación.
      */
-    function cargarComponente () {
+    (function cargarComponente () {
         let componente = '#componente-paginador';
 
         //Carga referencias de los elementos de la interfaz.
+        uiTabla               = document.querySelector(`${componente} table`);
         uiContenido           = document.querySelector(`${componente} tbody`);
         uiTotalDeRegistros    = document.querySelector(`${componente} h5`);
         uiControlDePaginacion = document.querySelector(`${componente} .pagination`);
@@ -36,7 +38,7 @@ var Aplicacion = Aplicacion || {};
         //Carga la primera página del paginador.
         cargaPaginador( cargaParametros() );
         escuchaCambioDeParametros();
-    }
+    })();
 
     /**
      * Carga los parametros pasados a través de la sección hash de la URL que
@@ -95,29 +97,29 @@ var Aplicacion = Aplicacion || {};
             setTimeout(() => location.reload(), 3000)
             return;
           }
-          if (!confirm(`¿Desea eliminar el producto ${producto.nombre}?`)) {
-            return;
-          }
-          
-          AnimacionDeEspera.activar();
-          ServicioProductos
-          .eliminar(producto.id_producto)
-          .then(producto => {
-            Mensajes.correcto(5,`El producto ${producto.nombre} se elimino correctamente.`);
+
+          DialogoDeConfirmacion
+          .preguntar(`¿Desea eliminar el producto <i>${producto.nombre}</i>?`)
+          .then(()=> {
+              AnimacionDeEspera.activar();
+
+              ServicioProductos
+              .eliminar(producto.id_producto)
+              .then(producto => {
+                Mensajes.correcto(5,`El producto ${producto.nombre} se elimino correctamente.`);
+              })
+              .catch(e => Mensajes.error(5,`Ocurrio un problema al eliminar el producto ${producto.nombre}`))
+              .finally(()=>setTimeout(() => location.reload(), 2000))
           })
-          .catch(e => Mensajes.error(5,`Ocurrio un problema al eliminar el producto ${producto.nombre}`))
-          .finally(()=>setTimeout(() => location.reload(), 2000))
+
         })
         .catch(e=> Mensajes.error(4,'No se pudieron obtener los datos del producto.'));
     }
 
     function cargarAccionEliminar(nodos) {
-      for(var i=0;i<nodos.length;i++) {
-        nodos[i].addEventListener('click', (e)=>{
-          let idProducto = e.target.id.split('-')[1];
-          eliminarProducto(idProducto);
-        });
-      };
+        for(var i=0;i<nodos.length;i++) {
+          nodos[i].onclick = e => eliminarProducto(e.target.id.split('-')[1]);
+        };
     }
     
     /**
@@ -127,10 +129,14 @@ var Aplicacion = Aplicacion || {};
      */
     function renderEncabezado(totalDeElementos) {
         if (totalDeElementos) {
+          uiTabla.style.display = 'table';
+          uiControlDePaginacion.style.display = 'block';
           uiTotalDeRegistros.innerHTML = `Total de productos: ${totalDeElementos}`;
         } else {
+          uiTabla.style.display = 'none';
+          uiControlDePaginacion.style.display = 'none';
           uiControlDePaginacion.innerHTML = ``;
-          uiTotalDeRegistros.innerHTML =`Sin productos registrados`;
+          uiTotalDeRegistros.innerHTML =`Sin productos registrados en el sistema.`;
         }
     }
 
@@ -147,7 +153,7 @@ var Aplicacion = Aplicacion || {};
               <td>
                ${extension_imagen
                  ?`<img class="imagen-redondeada"
-                   src="/img/subidas/p-${id_producto}.${extension_imagen}">`
+                   src="/crm-b/img/subidas/p-${id_producto}.${extension_imagen}">`
                  :''}
               ${nombre}
               </td>
@@ -205,6 +211,4 @@ var Aplicacion = Aplicacion || {};
                &raquo; </a>
           </li>`;
     }
-
-    return {cargarComponente};
-});
+})();

@@ -5,8 +5,9 @@ Aplicacion.Componentes.ComponenteBuscarProveedor = (function () {
     let { ServicioProveedores } = Aplicacion.Servicios;
 
     function _renderBuscarProveedor() {
-        div = document.createElement('div');
-        div.innerHTML =`
+      div = document.createElement("div");
+      div.classList.add("autocomplete-proveedor")
+      div.innerHTML =`
           <label>Nombre del proveedor</label>
           <input name="nombre" type="text" autocomplete="off"
             placeholder="Ingresa el nombre del proveedor"
@@ -22,6 +23,7 @@ Aplicacion.Componentes.ComponenteBuscarProveedor = (function () {
         
         if (event.target.value.length<3) {
             uiSugerenciasProveedores.innerHTML = '';
+            onclick('');
             return;
         }
 
@@ -29,7 +31,7 @@ Aplicacion.Componentes.ComponenteBuscarProveedor = (function () {
         .obtenerPorNombre(event.target.value)
         .then(proveedores => {
             uiSugerenciasProveedores.innerHTML = '';
-            onclick({id_proveedor: ''});
+            onclick('');
 
             proveedores.reduce( (acc, {nombre, id_proveedor}) => {
                 let li = document.createElement('li');

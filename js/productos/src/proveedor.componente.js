@@ -8,12 +8,13 @@ Aplicacion.Componentes.ComponenteProveedor = (function () {
         div = document.createElement('div');
         div.innerHTML =`
           <div class="proveedor grid-x grid-margin-x">
+            <input name="id_precio" type="hidden">
             <input name="id_proveedor" type="hidden">
             <div class="medium-5 cell autocomplete proveedor"></div>
-            <div class="medium-2 cell">
+            <div class="medium-4 cell">
               <label>Precio por unidad
               <input name="precio_por_unidad" type="number"
-                placeholder="Ingresa el precio" min="0">
+                placeholder="Ingresa el precio" min="0" required>
               </label>
             </div>
             <div class="medium-2 cell">
@@ -24,11 +25,11 @@ Aplicacion.Componentes.ComponenteProveedor = (function () {
                 <label class="switch-paddle block"></label>
               </div>
             </div>
-            <div class="medium-2 cell">
+            <div class="medium-1 cell" style="padding-top: 25px">
               <a class="eliminar">eliminar</a>
             </div>
           </div>`;
-      return div;
+      return div.firstElementChild;
     }
 
     function _obtenerDatosDeProveedor(campos) {
@@ -39,6 +40,12 @@ Aplicacion.Componentes.ComponenteProveedor = (function () {
             }
         }
         return proveedor;
+    }
+
+    function _establecerDatosDeProveedor(valores, campos) {
+        for ( var i=0;i<campos.length; i++) {
+            campos[i].value = valores[campos[i].name];
+        }
     }
 
     function _eliminarProveedor(contenedor, uiProveedor) {
@@ -66,12 +73,14 @@ Aplicacion.Componentes.ComponenteProveedor = (function () {
         //Evento para eliminar proveedor.
         uiBotonEliminar
         .addEventListener('click', () => {
-          _eliminarProveedor(contenedor,uiProveedor)
-          _fnEliminarProveedor(this);
+          _fnEliminarProveedor(this)
+          .then(()=>{
+              _eliminarProveedor(contenedor,uiProveedor);
+          });
         });
 
         uiCheckBoxUnidadPrecio
-        .addEventListener('change', (e) => {
+        .addEventListener('change', e => {
             checkbox = e.target;
             if (checkbox.checked) {
                 checkbox.value = 'USD';
@@ -86,6 +95,12 @@ Aplicacion.Componentes.ComponenteProveedor = (function () {
         this.obtenerDatosDeProveedor = () => _obtenerDatosDeProveedor(
             uiProveedor.querySelectorAll('input')
         );
+
+        this.establecerDatosDeProveedor = (proveedor) => {
+            _establecerDatosDeProveedor(proveedor, uiProveedor.querySelectorAll('input'));
+            uiCheckBoxUnidadPrecio.value === 'USD' && (uiCheckBoxUnidadPrecio.checked=true); 
+            return this;
+        };
 
         this.eliminarProveedor = (fnEliminarProveedor) => {
             _fnEliminarProveedor = fnEliminarProveedor;

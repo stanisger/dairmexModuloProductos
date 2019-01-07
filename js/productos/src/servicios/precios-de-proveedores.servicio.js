@@ -2,10 +2,9 @@ var Aplicacion = Aplicacion || {};
     Aplicacion.Servicios = Aplicacion.Servicios || {};
 
 Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
-   const API_URL = `${location.origin}/preciosdeproveedoresapi`;
+   const API_URL = `${location.origin}/crm-b/preciosdeproveedoresapi`;
    
    return {
-       
        alta(precios) {
          return fetch(`${API_URL}/alta`, {
                method: 'POST',
@@ -26,7 +25,7 @@ Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
          .then(res => res.proveedores)
        },
 
-       eliminar(iddentificador) {
+       eliminar(identificador) {
             return fetch(
                `${API_URL}/eliminar`
               +`?identificadores[]=${identificador}`,
@@ -34,5 +33,6 @@ Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
             .then(res => res.json())
             .then(res => res.proveedores);
        },
-   }
+   };
+
 })();

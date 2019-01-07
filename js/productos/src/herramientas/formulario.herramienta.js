@@ -9,4 +9,9 @@ Aplicacion.Herramientas.Formulario = {
             return acc;
         }, {});
     },
+    establecerCampos(datos, campos, formulario) {
+        campos.forEach( campo => {
+          formulario.querySelector('#'+campo).value = datos[campo];
+        });
+    }
 };

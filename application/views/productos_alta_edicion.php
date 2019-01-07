@@ -71,12 +71,12 @@
             <!--PROVEEDOR-->
             <div class="grid-x grid-margin-x">
               <div id="contenedor-proveedores"></div>
-              <div id="crear-proveedor" class="cell small-4"> 
+            </div>
+                          <div id="crear-proveedor" class="cell small-4"> 
                 <a class="button right w100 plus-product">
                   Añadir provedor <i class="fi-plus"></i>
                 </a>
               </div>
-            </div>
             <hr>
 
             <div class="save">
@@ -90,20 +90,24 @@
 </div>
 
 
-		
-   <!--MODULE SCRIPTS-->
+
+    <!--MODULE SCRIPTS-->
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/nucleo/componente.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensaje.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensajes.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/animacion-de-espera.componente.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/dialogo-de-confirmacion.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/textos.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/imagen-a-base64.herramienta.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/archivo-a-base64.herramienta.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/formulario.herramienta.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/archivos.servicio.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/proveedores.servicio.js"></script>
+    <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/precios-de-proveedores.servicio.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/buscar-proveedor.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/proveedor.componente.js"></script>
     <script type="text/javascript" src="<?=base_url()?>js/productos/src/proveedores.componente.js"></script>
-    
+
     <?php if($modo=='edicion'):?>
       <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/hash.herramienta.js"></script>
       <script type="text/javascript" src="<?=base_url()?>js/productos/src/editar-producto.componente.js"></script>
