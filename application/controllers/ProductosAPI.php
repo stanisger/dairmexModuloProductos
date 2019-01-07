@@ -24,6 +24,16 @@ class ProductosAPI extends CI_Controller
     }
     
     
+    /***/
+    public function totalDeRegistros() {
+        $consulta  = $this->input->get();
+        
+        jsonRespuesta(
+            $this->Productos_Modelo->totalDeRegistros($consulta['nombre'])
+        );
+    }
+    
+    
     /**
      * Enlace de consulta de productos para un paginador principal.
      *  
@@ -67,6 +77,21 @@ class ProductosAPI extends CI_Controller
         );
     }
     
+    
+    /***/
+    public function obtenerPorNombre()
+    {
+        $productos = $this->Productos_Modelo;
+        $consulta  = $this->input->get();
+        
+        if ($this->input->server('REQUEST_METHOD')!=='GET') {
+            restErrorMetodoNoPermitido();
+        }
+        
+        jsonRespuesta(
+            $productos->obtenerPorNombre($consulta['nombre'])
+        );
+    }
     
     /**
      * Operación para agregar un listado de nuevos productos a la base de

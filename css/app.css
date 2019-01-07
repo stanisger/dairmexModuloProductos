@@ -1,3 +1,8 @@
+@import 'modulos/mensajes.css';
+@import 'modulos/animacion-de-espera.css';
+@import 'modulos/autocomplete.css';
+@import 'modulos/modal.css';
+
 .bgBlue {
   background-color: #00c3f2 !important; }
 
@@ -80,7 +85,7 @@ a {
   font-family: 'Montserrat', sans-serif !important; }
 
 .block {
-  display: block; }
+  display: block !important; }
 
 .inlineBlock {
   display: inline-block; }
@@ -1001,8 +1006,6 @@ td.regularTd{
     border-radius: 5000px;
 
   }
-
-  
   .op-amarillo{
     color: #d2d252;
   }
@@ -1015,3 +1018,80 @@ td.regularTd{
   .op-rojo{
     color: red;
   }
+
+/*productos-desface de saas reizar*/
+
+  .title-products {
+    margin-bottom: 2rem !important;
+  }
+
+  .search-products input{
+  
+    -webkit-border-top-left-radius: 18px !important;
+    -webkit-border-bottom-left-radius: 18px !important;
+    -moz-border-radius-topleft: 18px !important;
+    -moz-border-radius-bottomleft: 18px !important;
+    border-top-left-radius: 18px !important;
+    border-bottom-left-radius: 18px !important;
+     
+  }
+
+  .search-products button { 
+
+  -webkit-border-top-right-radius: 18px !important;
+  -webkit-border-bottom-right-radius: 18px !important;
+  -moz-border-radius-topright: 18px !important;
+  -moz-border-radius-bottomright: 18px !important;
+  border-top-right-radius: 18px !important;
+  border-bottom-right-radius: 18px !important;
+  }
+
+  .search-products .list-group {
+    border: 0 !important;
+  }
+
+.search-products .plus-product {
+  border-radius: 18px !important;
+}
+
+.list-products {
+  background: #f3f3f3;
+  font-size: .8rem;
+  margin-top: -1rem;
+}
+
+.list-products li {
+  cursor: pointer;
+}
+
+.componente-paginador h5 {
+  margin-top: 2rem;
+}
+
+
+.componente-paginador table {
+  font-size: .8rem;
+}
+
+.pagination  li {
+  border-radius:  50% ;
+  padding: 0 !important;
+  transition: all .4s;
+  margin: 0 .1rem ;
+}
+
+.pagination  li:hover {
+ background: #E6E8EB;
+}
+
+.pagination  li  a:hover{ 
+  background: transparent !important;
+
+}
+
+.imagen-redondeada {
+    border-radius: 100px;
+    width:  50px;
+    height: 50px;
+    margin-right: 10px;
+}

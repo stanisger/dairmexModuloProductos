@@ -34,6 +34,19 @@ class Productos_Modelo extends CI_Model
     
     
     /**
+     * Obtiene el número total de productos registrados en la base de datos.
+     * 
+     * @return Integer Número total de registros.
+     */
+    public function totalDeRegistros($nombre)
+    {
+        return ['total' => $this->db->query(
+            "select * from productos where nombre like '%{$nombre}%'"
+        )->num_rows()];
+    }
+    
+    
+    /**
      * Regresa los productos almacenados en la base de datos para su uso en un
      * paginador.
      * 
@@ -48,22 +61,19 @@ class Productos_Modelo extends CI_Model
         $nombre      = !empty($consulta['nombre'])    ? $consulta['nombre']    : '';
         
         $this->db
-        ->select('id_producto')
-        ->select('nombre')
-        ->select('cantidad')
-        ->select('categoria')
+        ->select('*')
         ->from('productos')
-        ->order_by('id_producto','DESC')
+        ->order_by('id_producto', 'DESC')
         ->like('nombre', $nombre);
         
-        $seccion = ($pagina-1) * $noElementos;
+        $seccion = ($pagina - 1) * $noElementos;
         
         if ($seccion===0) {
             $this->db->limit( $noElementos );
         } else {
-            $this->db->limit( $seccion, $noElementos );
+            $this->db->limit( $noElementos, $seccion );
         }
-        
+
         return ['productos' => $this->db->get()->result()];
     }
     
@@ -90,6 +100,28 @@ class Productos_Modelo extends CI_Model
         }
         
         return ['productos' => $productos];
+    }
+    
+    
+    /**
+     * Obtiene los registros de productos cuyo nombre es parecido (operación
+     * <i>like</i>) al que se pasa como referencia.
+     *
+     * @param  string $nombre Nombre del producto.
+     * @return Array  Productos con nombre parecido.
+     */
+    public function obtenerPorNombre($nombre)
+    {
+        if (strlen($nombre)<3) {
+            return ['productos' => []];
+        }
+        
+        $this->db->like('nombre', $nombre);
+        $this->db->limit(5);
+        
+        return [
+            'productos' => $this->db->get('productos')->result()
+        ];
     }
     
     

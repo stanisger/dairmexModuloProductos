@@ -1,0 +1,64 @@
+/* The Modal (background) */
+.mod-modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    left: 0;
+    top:  0;
+    z-index: 9993; /* Sit on top */
+    padding-top: 30vh; /* Location of the box */
+    width:  100vw; /* Full width */
+    height: 100vh; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.3); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .mod-modal__content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    max-width: 500px;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),
+                0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+  }
+  
+  @keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+  }
+  
+  /* The Close Button */
+  .mod-modal__close {
+    color: blue;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    user-select: none;
+  }
+  
+  .mod-modal__close:hover,
+  .mod-modal__close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .mod-modal__header {
+    /*padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;*/
+  }
+  
+  .mod-modal__body {padding: 16px;}
+  
+  .mod-modal__footer {
+    padding: 2px 16px;
+    /*background-color: #5cb85c;
+    color: white;*/
+  }

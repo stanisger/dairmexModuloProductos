@@ -1,0 +1,112 @@
+/**
+ * Posicionamiento, Capas.
+ */
+.mensaje,
+#componente-mensajes {
+  display: flex;
+  align-items: center;
+}
+
+.mensaje {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#componente-mensajes {
+  flex-direction: column-reverse;
+  align-items: flex-end;
+  z-index: 9991;
+  position:fixed;
+  bottom: 50px;
+  right:  50px;
+}
+
+/**
+ * Diseño.
+ */
+#componente-mensajes {
+  width:  fit-content;
+  height: fit-content;
+}
+
+.mensaje {
+  border-radius: 2.5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+ /**
+  * El código de color de los mensajes fue tomado del código fuente de
+  * foundation en:
+  * 
+  * https://foundation.zurb.com/sites/docs/v/5.5.3/components/alert_boxes.html
+  */
+.mensaje.correcto {
+  background: #43AC6A;
+  border: #3a945b;
+  color: #FFFFFF;
+}
+
+.mensaje.alerta {
+  background: #f08a24;
+  border: #de770f;
+  color: #FFFFFF;
+}
+
+.mensaje.error {
+  background: #f04124;
+  border: #de2d0f;
+  color: #FFFFFF;
+}
+
+.mensaje.accion {
+  background: #1779ba;
+  border: #0078a0;
+  color: #FFFFFF;
+}
+
+  /** Contenido del mensaje. */
+  .mensaje p{
+    margin: 20px;
+    font-weight: 400;
+  }
+  
+  .mensaje i {
+    background: transparent;
+    color: #333;
+    font-family: 'Roboto', sans-serif, Arial;
+    margin: 20px;
+    font-style: normal;
+    padding: 3;
+    cursor: pointer;
+  }
+
+/**
+ * Animación.
+ */
+.mensaje {
+  height: fit-content;
+  max-height: 0;
+  max-width: 0;
+  will-change: max-width, max-height;
+  transition:  max-height 0.45s ease-in-out,
+               max-width  0s ease-in-out 0.55s;
+}
+
+.mensaje.js-mostrar {
+  max-height: 90vh;
+  max-width: 70vw;
+  /*transition: max-width  0.45s ease-in-out,
+              max-height 0s ease 0s;*/
+  transition: max-height 1s ease-in-out,
+              max-width  0.45s ease-in-out;
+}
+
+  .mensaje p{
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .mensaje.js-mostrar p {
+    opacity: 1;
+    transition: opacity 0.45s ease-in-out 0.45s;
+  }

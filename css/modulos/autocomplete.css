@@ -1,0 +1,18 @@
+.list-group {
+    margin-left: 0;
+}
+
+.list-group.autocomplete-productos {
+    width: calc(66.66667% - 1.875rem) !important;
+    position: absolute;
+}
+
+.autocomplete-proveedor {
+    position: relative;
+}
+
+.autocomplete-proveedor ul{
+    position: absolute;
+    z-index: 9989;
+    width: 100%;
+}

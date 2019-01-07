@@ -16,6 +16,10 @@ class PreciosDeProveedores_Modelo extends CI_Model
      */
     public function obtener($identificadores)
     {
+        if (empty($identificadores)) {
+            return ['precios' => []];
+        }
+        
         $this->db->or_where_in('id_precio',$identificadores);
         $productos = $this->db->get('precios_de_proveedores')->result();
         return ['precios' => $productos];
