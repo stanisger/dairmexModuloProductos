@@ -2,9 +2,9 @@ Aplicacion = Aplicacion || {};
 Aplicacion.Componentes = Aplicacion.Componentes || {};
 
 Aplicacion.Componentes.ComponenteProveedores = (function () {
-    let { ComponenteProveedor }             = Aplicacion.Componentes;
-    let { DialogoDeConfirmacion, Mensajes } = Aplicacion.InterfazDeUsuario;
-    let { ServicioPreciosDeProveedores }    = Aplicacion.Servicios;
+    let { ComponenteProveedor }                                = Aplicacion.Componentes;
+    let { DialogoDeConfirmacion, Mensajes, AnimacionDeEspera } = Aplicacion.InterfazDeUsuario;
+    let { ServicioPreciosDeProveedores }                       = Aplicacion.Servicios;
 
     //Componentes de la Interfaz de Usuario.
     let uiBotonAgregarProveedor,
@@ -46,13 +46,15 @@ Aplicacion.Componentes.ComponenteProveedores = (function () {
         +` del proveedor <i>${proveedor.nombre}</i> asociados `
         +`a este producto?`)
         .then(() => {
+            AnimacionDeEspera.activar();
             return ServicioPreciosDeProveedores
             .eliminar(proveedor.id_precio)
-            .then(()=>{
-                Mensajes.correcto(4,'Datos de proveedor eliminados correctamente.');
-            }).catch( (e) => {
-               console.log(e.message)
-               Mensajes.error(4,'Ocurrió un problema al eliminar los datos de proveedor solicitado.');
+            .then(()=> {
+                AnimacionDeEspera.desactivar();
+                Mensajes.correcto(4,'Datos de proveedor eliminados correctamente.')
+            }).catch( () => {
+                Mensajes.error(4,'Ocurrió un problema al eliminar los datos de proveedor solicitado.');
+                setTimeout(location.reload(), 2000);
             });
         });
     }
@@ -66,11 +68,19 @@ Aplicacion.Componentes.ComponenteProveedores = (function () {
         });
     }
 
-    function obtenerDatosDeProveedores() {
+    function obtenerDatosDeProveedoresNuevos() {
         return proveedores
         .map(proveedor => proveedor.obtenerDatosDeProveedor())
-        .filter(proveedor => !proveedor.id_precio)
+        .filter(proveedor => !proveedor.id_precio);
     }
 
-    return {cargarComponente, obtenerDatosDeProveedores};
+    function obtenerDatosDeProveedoresActualizados() {
+        return proveedores
+        .map(proveedor => proveedor.obtenerDatosDeProveedor())
+        .filter(proveedor => !!proveedor.id_precio)
+        .map( ({id_precio,id_proveedor,precio_por_unidad,unidad_precio}) =>
+              ({id_precio,id_proveedor,precio_por_unidad,unidad_precio}));
+    }
+
+    return {cargarComponente, obtenerDatosDeProveedoresNuevos, obtenerDatosDeProveedoresActualizados};
 })();

@@ -11,7 +11,8 @@
         <div id="modulo-productos" class="app-dashboard-body-content off-canvas-content" data-off-canvas-content>
       
           <form id="producto">
-            <h3 class="font2 colorFont light title-products">Alta de productos</h3> 
+            <h3 class="font2 colorFont light title-products">Alta de productos</h3>
+            <input type="hidden" id="id_producto" required>
             <div class=" grid-x grid-margin-x"> 
               <div class="medium-5 cell">
                 <label>Nombre del producto
@@ -58,6 +59,7 @@
               <div class="medium-2 cell">
                   <label id="boton-imagen" class="button">Imagen</label>
                   <input type="file" id="imagen"
+                    accept="image/x-png,image/jpeg"
                     class="show-for-sr" autocomplete="off">
                   <figure>
                     <img id="contenedor-imagen">
@@ -72,7 +74,7 @@
             <div class="grid-x grid-margin-x">
               <div id="contenedor-proveedores"></div>
             </div>
-                          <div id="crear-proveedor" class="cell small-4"> 
+              <div id="crear-proveedor" class="cell small-4"> 
                 <a class="button right w100 plus-product">
                   Añadir provedor <i class="fi-plus"></i>
                 </a>
@@ -80,8 +82,8 @@
             <hr>
 
             <div class="save">
-              <input type="reset"  value="Cancelar" title="Cancelar"/>
-			  <input type="submit" value="Guardar cambios" title="Guardar cambios"/>
+              <input type="submit" id="btn-reset" value="<?=$modo=='edicion'?'Restaurar':'Limpiar'?>"/>
+			  <input type="submit" id="guardar" value="Guardar cambios" title="Guardar cambios"/>
 	        </div>
         </form>
     </div>

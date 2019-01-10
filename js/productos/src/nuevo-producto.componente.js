@@ -21,7 +21,12 @@
         uiEntradaImagen.addEventListener('change', cargarImagen);
         uiBotonImagen.addEventListener('click', () => uiEntradaImagen.click());
         uiFormularioProducto.addEventListener('submit', altalDeProducto);
-        
+        uiFormularioProducto.querySelector('#btn-reset').onclick = (e)=>{
+            e.preventDefault();
+            datosImagen = {};
+            uiMostrarImagen.src = '';
+            uiFormularioProducto.reset();
+        };
         ComponenteProveedores.cargarComponente();
     })();
 
@@ -52,7 +57,7 @@
               uiFormularioProducto
           ),
           extension_imagen: datosImagen.extension,
-          proveedores: ComponenteProveedores.obtenerDatosDeProveedores()
+          proveedores: ComponenteProveedores.obtenerDatosDeProveedoresNuevos()
         };
     }
 
@@ -77,10 +82,10 @@
               .then( () => Mensajes.correcto(4, Textos.imagenAltaCorrecta))
               .catch(() => Mensajes.error(4, Textos.imagenAltaError));
         })
-        .catch( () => Mensajes.error(4, Textos.productoAltaError))
+        .catch( (e) => console.log(e.message)||Mensajes.error(4, Textos.productoAltaError))
         .finally( () => setTimeout( () => {
           AnimacionDeEspera.desactivar();
           location.href='index';
-        }, 5500 ) );
+        }, 1500 ) );
     }
 })();

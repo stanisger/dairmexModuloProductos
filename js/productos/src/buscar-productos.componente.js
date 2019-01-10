@@ -38,8 +38,8 @@ var Aplicacion = Aplicacion || {};
      * Cambia los parametros de la sección hash(#) de la URL. Lo cual activa el
      * evento de recarga del paginador.
      */
-    function _evtBuscarProductos(evento) {
-        location.hash = `#pagina=1&nombre=${evento.target.value}`;
+    function _evtBuscarProductos() {
+        location.hash = `#pagina=1&nombre=${_eiEntrada.value}`;
     }
 
     /**

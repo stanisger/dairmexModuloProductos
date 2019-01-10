@@ -142,22 +142,15 @@ class Productos_Modelo extends CI_Model
         
         foreach ($productos as $producto) {
             $proveedores = array_pop_key($producto, 'proveedores');
-            
+
             //Inserta producto en la base de datos.
             $this->db->insert('productos', $producto);
             $identificadores[] = $this->db->insert_id();
             
-            //Agrega proveedores en caso de no existir en la base de datos.
-            $proveedores = $this->_ci
-            ->Proveedores_Modelo
-            ->altaNormalizaProveedores(
-                $proveedores, $this->db->insert_id()
-            );
-            
             //Añade precios de los proveedores para el producto actual.
             $this->_ci
             ->PreciosDeProveedores_Modelo
-            ->alta($proveedores);
+            ->alta($proveedores, $this->db->insert_id());
         }
         
         if (!$this->db->trans_status()) {

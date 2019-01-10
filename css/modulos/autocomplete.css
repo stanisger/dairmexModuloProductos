@@ -2,11 +2,13 @@
     margin-left: 0;
 }
 
-.list-group.autocomplete-productos {
-    width: calc(66.66667% - 1.875rem) !important;
+.autocomplete-productos .list-group {
+    /*width: calc(66.66667% - 1.875rem) !important;*/
+    width: 100%;
     position: absolute;
 }
 
+.autocomplete-productos,
 .autocomplete-proveedor {
     position: relative;
 }

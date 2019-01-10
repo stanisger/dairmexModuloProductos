@@ -10,6 +10,24 @@
 class PreciosDeProveedores_Modelo extends CI_Model
 {
     /**
+     * Referencia al controlador
+     */
+    private $_ci;
+    
+    /**
+     * Constructor del objecto; establece una referencia al controlador y
+     * carga el modelo de {@link Proveedores_Modelo} y {@link
+     * PrecionDeProveedores_Modelo}, además del helper {@link
+     * array_pop_key}.
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_ci = &get_instance();
+        $this->_ci->load->model('Proveedores_Modelo');
+    }
+    
+    /**
      * Regresa los datos de los precios solicitados.
      * 
      * @param
@@ -56,11 +74,15 @@ class PreciosDeProveedores_Modelo extends CI_Model
      * @param Array $preciosPorPreveedores Listado de precios por proveedor
      *                                     para un producto.
      */
-    public function alta($precios)
+    public function alta($precios, $idProducto)
     {
         $identificadores = [];
-        
+
         $this->db->trans_begin();
+        
+        $precios = $this->_ci
+        ->Proveedores_Modelo
+        ->altaNormalizaProveedores($precios, $idProducto);
         
         foreach ($precios as $precio) {
             $this->db->insert('precios_de_proveedores', $precio);

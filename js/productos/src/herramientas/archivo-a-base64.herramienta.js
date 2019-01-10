@@ -17,7 +17,8 @@ Aplicacion.Herramientas.ArchivoABase64 = (function () {
     function cargarArchivo(referenciaDeArchivo) {
         return new Promise( (rs, rj) => {
             var fRead = new FileReader();
-            fRead.onload  = evt => rs(new Archivo(referenciaDeArchivo, evt.target.result));
+            fRead.onload  = evt => rs(
+                new Archivo(referenciaDeArchivo, evt.target.result));
             fRead.onerror = err => rj(err);
             fRead.readAsDataURL(referenciaDeArchivo);
         })
@@ -25,7 +26,7 @@ Aplicacion.Herramientas.ArchivoABase64 = (function () {
 
     function validarImagen(referenciaDeArchivo) {
         return !!referenciaDeArchivo
-          && !!referenciaDeArchivo.type.match(/^image/);
+            && !!referenciaDeArchivo.type.match(/^image/);
     }
     
     return {cargarArchivo, validarImagen}

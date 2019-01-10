@@ -5,10 +5,10 @@ Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
    const API_URL = `${location.origin}/crm-b/preciosdeproveedoresapi`;
    
    return {
-       alta(precios) {
+       alta(precios, {id_producto}) {
          return fetch(`${API_URL}/alta`, {
                method: 'POST',
-               body: JSON.stringify(precios),
+               body: JSON.stringify({precios, id_producto}),
                headers: {'Content-Type': 'application/json'}
            })
          .then(res => res.json())
@@ -18,7 +18,7 @@ Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
        actualizar(precios) {
          return fetch(`${API_URL}/actualizar`, {
                method: 'PUT',
-               body: JSON.stringify(precios),
+               body: JSON.stringify({precios}),
                headers: {'Content-Type': 'application/json'}
            })
          .then(res => res.json())

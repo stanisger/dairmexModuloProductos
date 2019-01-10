@@ -39,12 +39,13 @@ class PreciosDeProveedoresAPI extends CI_Controller
             restErrorMetodoNoPermitido();
         }
         
-        if (!array_key_exists('precios', $consulta)) {
+        if (!array_key_exists('precios', $consulta)
+         || !array_key_exists('id_producto', $consulta)) {
             restErrorOperacionNoPermitida();
         }
         
         jsonRespuesta(
-            $precios->alta($consulta['precios'])
+            $precios->alta($consulta['precios'], $consulta['id_producto'])
         );
     }
     
