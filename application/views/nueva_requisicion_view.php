@@ -66,10 +66,10 @@ require('header.php');
 					    				<td>
 					    					1						    						
 					    				</td>
-					    				<td>
-					    			
-					    					<textarea name="articulo-1" placeholder='Artículo' required class="art ar"></textarea>
-					    				</td>
+                                        <td class="autocompletar-productos-cliente">
+                                          <textarea id="entrada" name="articulo-1" class="art ar" placeholder="Artículo" required></textarea>
+                                          <ul class="list-group list-products"></ul>
+                                        </td>
 					    				<td>
 					    					<!-- <input type="text" name="medida-1" class='art' placeholder='Medida*'> -->
 					    					<textarea name="medida-1" placeholder='Medida' required class="art me"></textarea>
@@ -144,7 +144,7 @@ require('header.php');
 						<div id='wrapper_ul'>
 						<ul class="pricing-table hide-for-large" id='ul-1'>
 							  <li class="title bgFont ">1</li>
-							  <li class="price"><input type="text" name="articulo-1" class='art ar' placeholder='Artículo*' required></li>
+							  <li class="price"><input id="entrada" type="text" name="articulo-1" class='art ar' placeholder='Artículo*' required><ul class="list-group list-products"></ul></li>
 							  <li class="description"><input type="text" name="medida-1" class='art me' placeholder='Medida*' required></li>
 							  <li><input type="text" name="cantidad-1" class='art ca' placeholder='Cantidad*' required></li>
 							  <li><input type="text" name="proyecto-1" class='art pr' placeholder='Proyecto*' required></li>
@@ -203,6 +203,8 @@ require('header.php');
 		        <!--∆∆∆  content-->
 		</div>
 	    </div>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/src/buscar-productos-cliente.componente.js"></script>
 	<script type="text/javascript">
 		var rol_usuario = "<?php echo $rol_usuario; ?>";	
 	</script>

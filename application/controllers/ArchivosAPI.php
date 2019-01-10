@@ -13,15 +13,17 @@ class ArchivosAPI extends CI_Controller
     public function imagenes()
     {
         $consulta  = jsonSolicitud();
-        $direccionImagenes = APPPATH . '../img/subidas/';
+        $direcciónImagen = "img/subidas/{$consulta['nombre']}.{$consulta['extension']}";
+        
+        if (file_exists($direcciónImagen)) {
+            unlink($direcciónImagen);
+        }
         
         if (file_put_contents(
-            $direccionImagenes
-          . $consulta['nombre'] . '.'
-          . $consulta['extension'],
-          base64_decode($consulta['contenido'])
+              $direcciónImagen,
+              base64_decode($consulta['contenido'])
         )) {
-            jsonRespuesta(['url'=>"img/subidas/{$consulta['nombre']}.{$consulta['extension']}"]);
+            jsonRespuesta([ 'url' => $direcciónImagen ]);
         } else {
             restError('Problemas al cargar la imagen', 500);
         };

@@ -8,13 +8,29 @@
     position: absolute;
 }
 
+.autocompletar-productos-cliente,
 .autocomplete-productos,
 .autocomplete-proveedor {
     position: relative;
+}
+
+.pricing-table .price {
+    position: relative;
+}
+
+.pricing-table .price ul{
+    position: absolute;
+    width: calc(100% - 2.3rem);
 }
 
 .autocomplete-proveedor ul{
     position: absolute;
     z-index: 9989;
     width: 100%;
+}
+
+.autocompletar-productos-cliente ul {
+    position:absolute;
+    margin-top: 0.5px;
+    width:600px;
 }

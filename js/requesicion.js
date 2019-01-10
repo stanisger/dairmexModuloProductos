@@ -41,18 +41,45 @@ $(document).ready(function(){
 	$.validator.messages.required 	= "Campo obligatorio *";
 	$.validator.messages.minlength  = "2 caracteres mínimo";
 	*/
-	
+
+    function CargarComponente(HTML) {
+        var contenedor = document.createElement('div');
+        $(contenedor).append(HTML);
+        return contenedor.firstElementChild;
+    }
+
+    new Aplicacion.Componentes.AutocompletarProductosCliente()
+    .cargarComponente(document.querySelector('#tr-1 .autocompletar-productos-cliente'));
+
+
+    console.log(document.querySelector('#ul-1 .price'));
+    new Aplicacion.Componentes.AutocompletarProductosCliente()
+    .cargarComponente(document.querySelector('#ul-1 .price'));
+
  	$("#add").click(function(){
  		var idlastsr = $('#tabla_req tr:last').attr('id');
  		var idrow 	 = idlastsr.split('tr-'); 		 		
  		//alert(idrow[1]);
  		if(isNaN(parseInt(idrow[1]))===false){
  			var nuevoId = parseInt(idrow[1])+1;
- 			$("#limit").val(nuevoId);
+            $("#limit").val(nuevoId);
+            
+
  			if(rol_usuario=='suscriptor'){
- 				$("#tabla_req").append('<tr id="tr-'+nuevoId+'" class="tr-number"><td>'+nuevoId+'</td><td><textarea  name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo" required ></textarea></td><td><textarea  name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></textarea></td><td><textarea name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></textarea></td><td><textarea name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></textarea></td><td><textarea name="comentarios-'+nuevoId+'" class="co" placeholder="Comentarios" ></textarea></td><td><div class="add2 show-for-large"><button type="button" class="del" data-id="tr-'+nuevoId+'">Eliminar</button></div></td></tr>');
+                let nodoFila = CargarComponente('<tr id="tr-'+nuevoId+'" class="tr-number"><td>'+nuevoId+'</td><td class="autocompletar-productos-cliente"><textarea id="entrada" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo" required ></textarea><ul class="list-group list-products"></ul></td><td><textarea  name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></textarea></td><td><textarea name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></textarea></td><td><textarea name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></textarea></td><td><textarea name="comentarios-'+nuevoId+'" class="co" placeholder="Comentarios" ></textarea></td><td><div class="add2 show-for-large"><button type="button" class="del" data-id="tr-'+nuevoId+'">Eliminar</button></div></td></tr>');
+                
+                console.log(nodoFila);
+                new Aplicacion.Componentes.AutocompletarProductosCliente()
+                .cargarComponente(nodoFila.querySelector('.autocompletar-productos-cliente'));
+
+ 				$("#tabla_req").append(nodoFila);
  			}else{
- 				$("#tabla_req").append('<tr id="tr-'+nuevoId+'" class="tr-number"><td>'+nuevoId+'</td><td><textarea  name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo" required ></textarea></td><td><textarea  name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></textarea></td><td><textarea name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></textarea></td><td><textarea name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></textarea></td><td><select name="estatus-'+nuevoId+'" required class="art es"><option value="0">En proceso</option><option value="1">Realizado</option><option value="2">No realizado</option></select></td><td><textarea name="comentarios-'+nuevoId+'" class="co" placeholder="Comentarios" ></textarea></td><td><input type="text" name="fecha_entrega-'+nuevoId+'" class="art fe" placeholder="Fecha de entrega"></td><td><div class="add2 show-for-large"><button type="button" class="del" data-id="tr-'+nuevoId+'">Eliminar</button></div></td></tr>');	
+                let nodoFila = CargarComponente('<tr id="tr-'+nuevoId+'" class="tr-number"><td>'+nuevoId+'</td><td class="autocompletar-productos-cliente"><textarea id="entrada" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo" required ></textarea><ul class="list-group list-products"></ul></td><td><textarea  name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></textarea></td><td><textarea name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></textarea></td><td><textarea name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></textarea></td><td><select name="estatus-'+nuevoId+'" required class="art es"><option value="0">En proceso</option><option value="1">Realizado</option><option value="2">No realizado</option></select></td><td><textarea name="comentarios-'+nuevoId+'" class="co" placeholder="Comentarios" ></textarea></td><td><input type="text" name="fecha_entrega-'+nuevoId+'" class="art fe" placeholder="Fecha de entrega"></td><td><div class="add2 show-for-large"><button type="button" class="del" data-id="tr-'+nuevoId+'">Eliminar</button></div></td></tr>')
+
+                new Aplicacion.Componentes.AutocompletarProductosCliente()
+                .cargarComponente(nodoFila.querySelector('.autocompletar-productos-cliente'));
+
+ 				$("#tabla_req").append(nodoFila);	
  			}			 			
  			
  		}else{
@@ -108,29 +135,6 @@ $(document).ready(function(){
 
 	});
 
- 	//$(".del").on('click',function(){
- 		//alert();
- 		/*var domeleiment = $(this).attr('data-id');
- 		var elemtInt 	= domeleiment.split('tr-');
- 		if(isNaN(parseInt(elemtInt[1]))===false){
-
- 			var viejoId = $("#limit").val();
- 			var nuevoId = parseInt(viejoId)-1;
- 			
- 			if(nuevoId <= 0){
- 				alert('No se pueden eliminar todas las filas');
- 			}else{
- 				$("#"+domeleiment).remove(); 			
-	 			for (i = 1; i <= nuevoId; i++) { 				
-					var Old_id = $("#tabla_req").parent('tr').attr('id');			    
-					alert(Old_id);
-				}
- 			} 			
- 		}else{
- 			alert('No se puede eliminar la fila, refresque su navegador');
- 		}*/
- 	//});
-
  	$("#addMobil").click(function(){
  		
  		var idlastul= $('#wrapper_ul').children().last().attr('id');
@@ -140,10 +144,20 @@ $(document).ready(function(){
  			var nuevoId = parseInt(idrowul[1])+1;
  			$("#limitmobil").val(nuevoId);
 
- 			if(rol_usuario=='suscriptor'){ 				
- 				$("#wrapper_ul").append('<ul class="pricing-table hide-for-large" id="ul-'+nuevoId+'"><li class="title bgFont ">'+nuevoId+'</li><li class="price"><input type="text" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo*" required></li><li class="description"><input type="text" name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></li><li><input type="text" name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></li><li><input type="text" name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></li><li><textarea class="co" name="comentarios-'+nuevoId+'" placeholder="Comentarios"></textarea></li><li class="title bgFont delMovil" data-id="ul-'+nuevoId+'">Eliminar</li></ul>');
- 			}else{ 				
- 				$("#wrapper_ul").append('<ul class="pricing-table hide-for-large" id="ul-'+nuevoId+'"><li class="title bgFont ">'+nuevoId+'</li><li class="price"><input type="text" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo*" required></li><li class="description"><input type="text" name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></li><li><input type="text" name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></li><li><input type="text" name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></li><li><select name="estatus-'+nuevoId+'" required class="art es"><option value="0">En proceso</option><option value="1">Realizado</option><option value="2">No realizado</option></select></li><li><textarea class="co" name="comentarios-'+nuevoId+'" placeholder="Comentarios"></textarea></li><li><input type="text" name="fecha_entrega-'+nuevoId+'" class="art fe" placeholder="Fecha de entrega"></li><li class="title bgFont delMovil" data-id="ul-'+nuevoId+'">Eliminar</li></ul>');
+ 			if(rol_usuario=='suscriptor'){
+                let nodoFila = CargarComponente('<ul class="pricing-table hide-for-large" id="ul-'+nuevoId+'"><li class="title bgFont ">'+nuevoId+'</li><li class="price"><input id="entrada" type="text" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo*" required><ul class="list-group list-products"></ul></li><li class="description"><input type="text" name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></li><li><input type="text" name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></li><li><input type="text" name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></li><li><textarea class="co" name="comentarios-'+nuevoId+'" placeholder="Comentarios"></textarea></li><li class="title bgFont delMovil" data-id="ul-'+nuevoId+'">Eliminar</li></ul>');
+
+                new Aplicacion.Componentes.AutocompletarProductosCliente()
+                .cargarComponente(nodoFila.querySelector('.price'));
+
+ 				$("#wrapper_ul").append(nodoFila);
+ 			}else{
+                let nodoFila = CargarComponente('<ul class="pricing-table hide-for-large" id="ul-'+nuevoId+'"><li class="title bgFont ">'+nuevoId+'</li><li class="price"><input id="entrada" type="text" name="articulo-'+nuevoId+'" class="art ar" placeholder="Artículo*" required><ul class="list-group list-products"></ul></li><li class="description"><input type="text" name="medida-'+nuevoId+'" class="art me" placeholder="Medida*" required></li><li><input type="text" name="cantidad-'+nuevoId+'" class="art ca" placeholder="Cantidad*" required></li><li><input type="text" name="proyecto-'+nuevoId+'" class="art pr" placeholder="Proyecto*" required></li><li><select name="estatus-'+nuevoId+'" required class="art es"><option value="0">En proceso</option><option value="1">Realizado</option><option value="2">No realizado</option></select></li><li><textarea class="co" name="comentarios-'+nuevoId+'" placeholder="Comentarios"></textarea></li><li><input type="text" name="fecha_entrega-'+nuevoId+'" class="art fe" placeholder="Fecha de entrega"></li><li class="title bgFont delMovil" data-id="ul-'+nuevoId+'">Eliminar</li></ul>');
+                
+                new Aplicacion.Componentes.AutocompletarProductosCliente()
+                .cargarComponente(nodoFila.querySelector('.price'));
+
+ 				$("#wrapper_ul").append(nodoFila);
  			}
  			
  		}else{
