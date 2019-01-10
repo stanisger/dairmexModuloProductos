@@ -48,13 +48,14 @@ $(document).ready(function(){
         return contenedor.firstElementChild;
     }
 
-    new Aplicacion.Componentes.AutocompletarProductosCliente()
-    .cargarComponente(document.querySelector('#tr-1 .autocompletar-productos-cliente'));
+	let lista = document.querySelector('#tr-1 .autocompletar-productos-cliente');
+    !!lista && new Aplicacion.Componentes.AutocompletarProductosCliente()
+    .cargarComponente(lista);
 
 
-    console.log(document.querySelector('#ul-1 .price'));
-    new Aplicacion.Componentes.AutocompletarProductosCliente()
-    .cargarComponente(document.querySelector('#ul-1 .price'));
+	let listaMovil = document.querySelector('#ul-1 .price');
+    !!listaMovil && new Aplicacion.Componentes.AutocompletarProductosCliente()
+    .cargarComponente(listaMovil);
 
  	$("#add").click(function(){
  		var idlastsr = $('#tabla_req tr:last').attr('id');

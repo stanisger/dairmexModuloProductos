@@ -204,7 +204,6 @@ require('header.php');
 		</div>
 	    </div>
 	<script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>
-	<script type="text/javascript" src="<?=base_url()?>js/productos/src/buscar-productos-cliente.componente.js"></script>
 	<script type="text/javascript">
 		var rol_usuario = "<?php echo $rol_usuario; ?>";	
 	</script>
