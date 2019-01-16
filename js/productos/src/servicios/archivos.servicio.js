@@ -3,7 +3,8 @@ var Aplicacion = Aplicacion || {};
 
 Aplicacion.Servicios.ServicioArchivos = (() => {
     
-    const API_URL = `${location.origin}/crm-b/ArchivosAPI`;
+  var { entornoPrefijo } = Configuracion;
+  const API_URL = `${location.origin}/${entornoPrefijo}/ArchivosAPI`;
     
     return {
         subirImagen(datosDeImagen) {

@@ -4,6 +4,7 @@
     let { ServicioProductos, ServicioArchivos, ServicioPreciosDeProveedores } = Aplicacion.Servicios;
     let { ArchivoABase64, Formulario, HerramientaHash }                       = Aplicacion.Herramientas;
     let { ComponenteProveedores }                                             = Aplicacion.Componentes;
+    let { entornoPrefijo }                                                    = Configuracion;
 
     //Componentes de la Interfaz de Usuario.
     let uiFormularioProducto, uiEntradaImagen, uiMostrarImagen, uiBotonImagen;
@@ -42,7 +43,7 @@
     }
 
     function imagenPrecargada({id_producto, extension_imagen = null}) {
-        extension_imagen && (uiMostrarImagen.src=`/crm-b/img/subidas/p-${id_producto}.${extension_imagen}`);
+        extension_imagen && (uiMostrarImagen.src=`/${entornoPrefijo}/img/subidas/p-${id_producto}.${extension_imagen}`);
     }
 
     function cargarImagen() {

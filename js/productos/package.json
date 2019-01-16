@@ -1,0 +1,29 @@
+{
+  "name": "modulo-productos",
+  "version": "1.0.0",
+  "description": "Este módulo sirve para llevar el control de las altas, bajas y consultas de los productos que distribuye Dairmex en los diferentes proyectos de instalación de sistemas de calefacción.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "start": "gulp",
+    "build-local": "gulp productos--local",
+    "build-produccion": "gulp productos--produccion",
+    "test": "echo 'prueba npm'"
+  },
+  "keywords": [
+    "Productos",
+    "Dairmex"
+  ],
+  "author": "Ricardo Bermúdez Bermúdez",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "command-line-args": "^5.0.2",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-uglify": "^3.0.1"
+  }
+}

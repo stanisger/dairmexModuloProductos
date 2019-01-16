@@ -2,7 +2,9 @@ var Aplicacion = Aplicacion || {};
     Aplicacion.Servicios = Aplicacion.Servicios || {};
 
 Aplicacion.Servicios.ServicioPreciosDeProveedores = (() => {
-   const API_URL = `${location.origin}/crm-b/PreciosDeProveedoresAPI`;
+   
+   var { entornoPrefijo } = Configuracion;
+   const API_URL = `${location.origin}/${entornoPrefijo}/PreciosDeProveedoresAPI`;
    
    return {
        alta(precios, {id_producto}) {

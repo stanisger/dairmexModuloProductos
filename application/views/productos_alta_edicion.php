@@ -92,29 +92,10 @@
 </div>
 
 
-
-    <!--MODULE SCRIPTS-->
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/nucleo/componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensaje.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/mensajes.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/animacion-de-espera.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/dialogo-de-confirmacion.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/interfaz-de-usuario/textos.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/archivo-a-base64.herramienta.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/formulario.herramienta.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/archivos.servicio.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/proveedores.servicio.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/precios-de-proveedores.servicio.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/buscar-proveedor.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/proveedor.componente.js"></script>
-    <script type="text/javascript" src="<?=base_url()?>js/productos/src/proveedores.componente.js"></script>
-
     <?php if($modo=='edicion'):?>
-      <script type="text/javascript" src="<?=base_url()?>js/productos/src/herramientas/hash.herramienta.js"></script>
-      <script type="text/javascript" src="<?=base_url()?>js/productos/src/editar-producto.componente.js"></script>
+      <script type="text/javascript" src="<?=base_url()?>js/productos/dist/productos.edicion.js"></script>
     <?php else:?>
-      <script type="text/javascript" src="<?=base_url()?>js/productos/src/nuevo-producto.componente.js"></script>
+      <script type="text/javascript" src="<?=base_url()?>js/productos/dist/productos.alta.js"></script>
     <?php endif;?>
     
 <?php require('footer.php')?>

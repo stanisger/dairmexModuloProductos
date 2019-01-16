@@ -203,7 +203,7 @@ require('header.php');
 		        <!--∆∆∆  content-->
 		</div>
 	    </div>
-	<script type="text/javascript" src="<?=base_url()?>js/productos/src/servicios/productos.servicio.js"></script>
+	<script type="text/javascript" src="<?=base_url()?>js/productos/dist/productos.cliente.js"></script>
 	<script type="text/javascript">
 		var rol_usuario = "<?php echo $rol_usuario; ?>";	
 	</script>

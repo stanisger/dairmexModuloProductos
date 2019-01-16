@@ -10,7 +10,8 @@ var Aplicacion = Aplicacion || {};
  */
 Aplicacion.Servicios.ServicioProveedores = (() => {
 
-    const API_URL = `${location.origin}/crm-b/ProveedoresAPI`;
+    var { entornoPrefijo } = Configuracion;
+    const API_URL = `${location.origin}/${entornoPrefijo}/ProveedoresAPI`;
 
     return {
         /**

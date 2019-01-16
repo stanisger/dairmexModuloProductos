@@ -4,6 +4,7 @@ Aplicacion.Componentes = Aplicacion.Componentes || {};
 Aplicacion.Componentes.AutocompletarProductosCliente = (() =>  {
     
     let { ServicioProductos } = Aplicacion.Servicios;
+    let { entornoPrefijo } = Configuracion;
 
     return class AutocompletarProductosCliente {
         cargarComponente(contenedorPrincipal) {
@@ -34,7 +35,7 @@ Aplicacion.Componentes.AutocompletarProductosCliente = (() =>  {
                 li.addEventListener('click', () => this.uiEntrada.value = nombre)
                 li.innerHTML =`${extension_imagen
                   ?`<img class="imagen-redondeada"
-                      src="/crm-b/img/subidas/p-${id_producto}.${extension_imagen}">`
+                      src="/${entornoPrefijo}/img/subidas/p-${id_producto}.${extension_imagen}">`
                   :''}
                   ${nombre}`;
                 acc.appendChild(li);

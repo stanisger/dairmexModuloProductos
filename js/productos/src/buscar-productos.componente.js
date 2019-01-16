@@ -10,6 +10,7 @@ var Aplicacion = Aplicacion || {};
 ( function () {
     //Importar                  //Desde ...
     var { ServicioProductos } = Aplicacion.Servicios;
+    let { entornoPrefijo }    = Configuracion;
 
     //Elementos de la interfaz de usuario para el buscador;
     var _eiEntrada,
@@ -81,7 +82,7 @@ var Aplicacion = Aplicacion || {};
               class="list-group-item">
               ${extension_imagen
                ?`<img class="imagen-redondeada"
-                   src="/crm-b/img/subidas/p-${id_producto}.${extension_imagen}">`
+                   src="/${entornoPrefijo}/img/subidas/p-${id_producto}.${extension_imagen}">`
                :''}
               ${nombre}
             </li>`)

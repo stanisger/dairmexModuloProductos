@@ -16,6 +16,7 @@ var Aplicacion = Aplicacion || {};
     let { ServicioProductos }                                  = Aplicacion.Servicios;
     let { HerramientaPaginador, HerramientaHash }              = Aplicacion.Herramientas;
     let { Mensajes, AnimacionDeEspera, DialogoDeConfirmacion } = Aplicacion.InterfazDeUsuario;
+    let { entornoPrefijo } = Configuracion;
 
     //Referencia de componentes en HTML.
     let uiTabla,
@@ -153,7 +154,7 @@ var Aplicacion = Aplicacion || {};
               <td>
                ${extension_imagen
                  ?`<img class="imagen-redondeada"
-                   src="/crm-b/img/subidas/p-${id_producto}.${extension_imagen}">`
+                   src="/${entornoPrefijo}/img/subidas/p-${id_producto}.${extension_imagen}">`
                  :''}
               ${nombre}
               </td>
