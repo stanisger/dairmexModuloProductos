@@ -23,7 +23,7 @@
               </div>
               <div class="medium-3 cell">
                 <label>Medidas
-                <input type="number" id="medida"
+                <input type="text" id="medida"
                   placeholder="Ingresa la medida"
                   min="0" autocomplete="off" required>
                 </label>
