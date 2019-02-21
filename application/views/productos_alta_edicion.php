@@ -36,6 +36,32 @@
                     <option value="m">m</option>
                     <option value="kg">kg</option>
                     <option value="g">g</option>
+                    <option value="M2">M2</option>
+                    <option value="ML">ML</option>
+                    <option value="PIE">PIE</option>
+                    <option value="YARDAS">YARDAS</option>
+                    <option value="PULGADAS">PULGADAS</option>
+                    <option value="BOTE">BOTE</option>
+                    <option value="LITRO">LITRO</option>
+                    <option value="GALON">GALON</option>
+                    <option value="KG">KG</option>
+                    <option value="CM">CM</option>
+                    <option value="MM">MM</option>
+                    <option value="PLACA">PLACA</option>
+                    <option value="WATTS">WATTS</option>
+                    <option value="CALIBRE">CALIBRE</option>
+                    <option value="CILINDRO">CILINDRO</option>
+                    <option value="ROLLO">ROLLO</option>
+                    <option value="TRAMO">TRAMO</option>
+                    <option value="RECARGA">RECARGA</option>
+                    <option value="CUBETA">CUBETA</option>
+                    <option value="ELEMENTOS">ELEMENTOS</option>
+                    <option value="CARTUCHO">CARTUCHO</option>
+                    <option value="CAJA">CAJA</option>
+                    <option value="GARRAFON">GARRAFON</option>
+                    <option value="COSTAL">COSTAL</option>
+                    <option value="BULTO">BULTO</option>
+                    <option value="SALCHICHA">SALCHICHA</option>
                   </select>
                 </label>
               </div>
