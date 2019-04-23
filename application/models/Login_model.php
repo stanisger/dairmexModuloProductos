@@ -8,6 +8,24 @@ class Login_model extends CI_Model {
 		parent::__construct();
 	}
 	
+	public function login_user_api($email,$password)
+	{
+	    $this->db->where('email',$email);
+	    $this->db->where('password',sha1($password));
+	    $query = $this->db->get('users');
+	    if (!empty($check_user = $query->row())) {
+	        return [
+	            'is_logued_in' 	=> 		true,
+	            'id_usuario' 	=> 		$check_user->id,
+	            'perfil'		=>		$check_user->perfil,
+	            'username' 		=> 		$check_user->nombre.' '.$check_user->apaterno,
+	            'email' 		=> 		$check_user->email,
+	            'files_api_token' =>    $check_user->files_api_token,
+	        ];
+	    }
+	    return [];
+	}
+	
 	public function login_user($email,$password)
 	{
 		$this->db->where('email',$email);

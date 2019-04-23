@@ -48,3 +48,8 @@ function restError($mensaje, $codigoError)
     
     exit(0);
 }
+
+
+function restAccesoDenegado() {
+    restError('No tienes permitido el acceso.', 401);
+}

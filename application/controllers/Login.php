@@ -7,6 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
 		$this->load->model('Login_model');
+		$this->load->helper(['resterror','restresponsejson']);
 		$this->load->library(array('session','form_validation'));
 		$this->load->helper(array('url','form'));
 		$this->load->database('default');
@@ -38,7 +39,20 @@ class Login extends CI_Controller
 				break;		
 		}
 	}
-
+	
+	public function apiSession() {
+	    $consulta     = $this->input->get();
+	    $credenciales = $this->Login_model->login_user_api($consulta['e'],$consulta['p']);
+	    
+	    if (empty($credenciales)) {
+	        restAccesoDenegado();
+	    }
+	    
+	    $credenciales['session_token'] = session_id();
+	    $this->session->set_userdata($credenciales);
+	    jsonRespuesta($credenciales);
+	}
+	
 	public function new_user()
 	{
 			if($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token'))
