@@ -1,4 +1,5 @@
 <?php
+set_time_limit(300);
 
 class ArchivosAPI extends CI_Controller
 {
