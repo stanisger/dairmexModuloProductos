@@ -7,7 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
 		$this->load->model('Login_model');
-		$this->load->helper(['resterror','restresponsejson']);
+		$this->load->helper(['resterror','restresponsejson', 'cors_config']);
 		$this->load->library(array('session','form_validation'));
 		$this->load->helper(array('url','form'));
 		$this->load->database('default');
@@ -40,7 +40,9 @@ class Login extends CI_Controller
 		}
 	}
 	
-	public function apiSession() {
+	public function apiLogin() {
+	    CORSAvailability();
+	    
 	    $consulta     = $this->input->get();
 	    $credenciales = $this->Login_model->login_user_api($consulta['e'],$consulta['p']);
 	    
@@ -51,6 +53,17 @@ class Login extends CI_Controller
 	    $credenciales['session_token'] = session_id();
 	    $this->session->set_userdata($credenciales);
 	    jsonRespuesta($credenciales);
+	}
+	
+	public function apiLogout()
+	{
+	    CORSAvailability();
+	    $this->session->sess_destroy();
+	    
+	    jsonRespuesta([
+	        "code"    => 200,
+	        "message" => "The session has destroyed",
+	    ]);
 	}
 	
 	public function new_user()
@@ -364,4 +377,6 @@ class Login extends CI_Controller
 		$this->session->sess_destroy();
 		redirect(base_url());
 	}
+	
+
 }

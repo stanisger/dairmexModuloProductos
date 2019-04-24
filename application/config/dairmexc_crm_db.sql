@@ -110,3 +110,19 @@ COMMIT;
 
 create user dairmexc_crm_usr@localhost identified by 'oa+_9_tF!a~@';
 grant all privileges on dairmexc_crm_db.* to dairmexc_crm_usr@localhost;
+
+--
+-- Componente de Reportes
+--
+CREATE TABLE reportes_de_proyectos(
+    id_reporte        INT UNSIGNED AUTO_INCREMENT,
+ -- id_usuario_creador INT UNSIGNED,
+    nombre_de_tienda   VARCHAR(100) NOT NULL,
+    ciudad             VARCHAR(100) NOT NULL,
+    descriptivo        VARCHAR(200),
+    estatus            VARCHAR(20),
+    __ingreso          DATETIME DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(id_reporte)
+)ENGINE=INNODB DEFAULT CHARSET='utf8';
+
+alter table users add files_api_token VARCHAR(156) DEFAULT 'ZGFpcm1leC1yZXBvcnRlcy1hcGk6MTIzbGZvw7EtMQ==';

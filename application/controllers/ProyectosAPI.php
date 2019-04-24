@@ -8,11 +8,15 @@ class ProyectosAPI extends CI_Controller
     {
         parent::__construct();
         $this->load->model(['Reportes_Modelo']);
-        $this->load->helper(['resterror','restresponsejson']);
+        $this->load->helper(['resterror','restresponsejson','cors_config']);
         $this->load->library(['session','form_validation',"pagination"]);
         $this->load->helper(array('url','form'));
         $this->load->database('default');
         
+        CORSAvailability();
+        if($this->input->server('REQUEST_METHOD')==='OPTIONS'){
+            exit(0);
+        }
         if (!$this->session->userdata('is_logued_in')) {
             restAccesoDenegado();
         }
@@ -27,6 +31,13 @@ class ProyectosAPI extends CI_Controller
     
     public function reporte() 
     {
+        if ($this->input->server('REQUEST_METHOD')==='GET') {
+            jsonRespuesta(
+                $this->Reportes_Modelo->obtener(
+                    $this->input->get('id')
+                )
+            );
+        }
         if ($this->input->server('REQUEST_METHOD')==='POST') {
             $reporte = jsonSolicitud();
             
