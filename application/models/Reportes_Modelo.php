@@ -8,9 +8,17 @@ class Reportes_Modelo extends CI_Model {
          )->result();
     }
     
-    public function obtener($idReporte) {
+    public function obtener($idReporte) 
+    {
         $this->db->or_where_in('id_reporte', $idReporte);
         return $this->db->get('reportes_de_proyectos')->row();
+    }
+    
+    public function obtenerPorFiltro($fecha, $ciudad, $nombre)
+    {
+        $this->db->like(["__ingreso"=>$fecha,"ciudad"=>$ciudad, "nombre_de_tienda"=>$nombre]);
+        
+        return $this->db->get('reportes_de_proyectos')->result();
     }
     
     public function agregar($reporte)
